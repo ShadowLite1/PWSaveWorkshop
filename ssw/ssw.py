@@ -1002,6 +1002,8 @@ class ESW(tk.Tk):
         self.geometry("1280x820")
         self.minsize(980, 650)
         self.session = SaveSession()
+        self.update_results = queue.Queue()
+        self.update_check_running = False
         style = ttk.Style(self)
         try:
             style.theme_use("clam")
@@ -1028,7 +1030,49 @@ class ESW(tk.Tk):
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=self.destroy)
         menu.add_cascade(label="File", menu=file_menu)
+        menu.add_command(label="Check for Updates", command=self.check_for_updates)
         self.config(menu=menu)
+
+    def check_for_updates(self):
+        if self.update_check_running:
+            return
+        self.update_check_running = True
+        self.status.set("Checking GitHub for the latest ESW release…")
+        threading.Thread(target=self.fetch_latest_release, daemon=True).start()
+        self.after(100, self.poll_update_check)
+
+    def fetch_latest_release(self):
+        request = urllib.request.Request(
+            "https://api.github.com/repos/ShadowLite1/PWSaveWorkshop/releases/latest",
+            headers={"User-Agent": "EspiritSaveWorkshop", "Accept": "application/vnd.github+json"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                release = json.load(response)
+            self.update_results.put(("release", release))
+        except urllib.error.HTTPError as exc:
+            self.update_results.put(("none" if exc.code == 404 else "error", str(exc)))
+        except Exception as exc:
+            self.update_results.put(("error", str(exc)))
+
+    def poll_update_check(self):
+        try:
+            kind, result = self.update_results.get_nowait()
+        except queue.Empty:
+            self.after(100, self.poll_update_check)
+            return
+        self.update_check_running = False
+        if kind == "none":
+            self.status.set("No public ESW release is available on GitHub yet.")
+            messagebox.showinfo("Check for Updates", "No public ESW release is available on GitHub yet. Updates will appear here once a release is published.")
+        elif kind == "error":
+            self.status.set("Could not check for updates.")
+            messagebox.showerror("Check for Updates", f"Could not check GitHub for updates.\n\n{result}")
+        else:
+            name = result.get("name") or result.get("tag_name") or "Latest release"
+            self.status.set(f"Latest GitHub release: {name}")
+            if messagebox.askyesno("Check for Updates", f"Latest published release: {name}\n\nThis experimental build is not tied to a release version. Open the release page to review and download it?"):
+                webbrowser.open("https://github.com/ShadowLite1/PWSaveWorkshop/releases/latest")
 
     def open_save(self) -> None:
         chosen = filedialog.askopenfilename(title="Open Peace Walker PC STW save")
