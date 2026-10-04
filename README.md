@@ -4,7 +4,8 @@ Experimental Windows save editor for Metal Gear Solid: Peace Walker.
 
 Includes Soldier Editor, Save Editor, and Loadout Editor. The Advanced Save Viewer tab has been removed. Loadouts support seven item slots and seven weapon slots; extended in-game capacity requires the corresponding runtime patch. The program icon contains a single 256x256 image.
 
-Save Editor has a scrollable mission list and a separate details pane divided vertically. It offers all 64 reference-list availability switches plus the existing SBM visibility profile. Confirmed switches retain their captured offsets; the remaining switches use the inferred reference-ID bitmap and are labeled experimental. Entries marked not incorporated retain that status. A visible/enabled entry is not a guarantee that its mission loads or works. Cross Battle includes its runtime-plugin requirement in the details pane.
+Save Editor has two matching scrollable mission columns separated by a vertical divider. It offers all 64 reference-list availability switches plus the existing SBM visibility profile. Confirmed switches retain their captured offsets; the remaining switches use the inferred reference-ID bitmap and are labeled experimental. Entries marked not incorporated retain that status. A visible/enabled entry is not a guarantee that its mission loads or works. Cross Battle requires the included Cross Battle ASI.
+The columns display internal names only; entries without a known internal name display their reference ID. Descriptions and per-entry status notes are retained in the catalog rather than shown in the interface.
 
 ## Run from source
 

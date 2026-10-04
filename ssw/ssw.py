@@ -4,6 +4,7 @@ import shutil
 import struct
 import sys
 import json
+import re
 import tkinter as tk
 from dataclasses import dataclass
 from pathlib import Path
@@ -221,7 +222,9 @@ if _mission_catalog.is_file():
         MISSION_REFERENCE[_bit] = _entry
         if _bit not in _known_bits:
             _extra_flags.append(MissionFlag(
-                f"{_id:03d} / {_entry['title']}", (_bit[0],), _bit[1],
+                (re.search(r"\b(?:sbm\d+|m\d{4})\b", _entry['title'], re.IGNORECASE).group(0).upper()
+                 if re.search(r"\b(?:sbm\d+|m\d{4})\b", _entry['title'], re.IGNORECASE)
+                 else f"Internal ID {_id:03d}"), (_bit[0],), _bit[1],
                 "Reference marks not incorporated" if _entry["marked_not_incorporated"] else "Experimental reference-ID mapping",
             ))
             _known_bits.add(_bit)
@@ -296,37 +299,39 @@ class InternalMissionTab(ttk.Frame):
         tk.Frame(self, bg="#111111", width=3).grid(row=2, column=1, sticky="ns")
         right = ttk.Frame(self, padding=(16, 0))
         right.grid(row=2, column=2, sticky="nsew")
-        ttk.Label(right, text="MISSION DETAILS", style="Heading.TLabel").pack(anchor="w")
-        self.details = tk.Text(right, wrap="word", height=15, relief="flat", bg="#d6d5bd")
-        self.details.pack(fill="both", expand=True, pady=12)
-        self.show_mission_details(0)
-        canvas = tk.Canvas(left, highlightthickness=0, bg="#d6d5bd")
-        scrollbar = ttk.Scrollbar(left, orient="vertical", command=canvas.yview)
-        scrollbar.pack(side="right", fill="y")
-        canvas.pack(fill="both", expand=True)
-        canvas.configure(yscrollcommand=scrollbar.set)
-        self.panel = ttk.Frame(canvas, padding=8)
-        window = canvas.create_window((0, 0), window=self.panel, anchor="nw")
-        self.panel.bind("<Configure>", lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
-        canvas.bind("<Configure>", lambda e: canvas.itemconfigure(window, width=e.width))
-        def scroll(event):
-            canvas.yview_scroll(-int(event.delta / 120), "units")
-        canvas.bind("<MouseWheel>", scroll)
-        self.panel.bind("<MouseWheel>", scroll)
+        panels = []
+        scroll_handlers = []
+        for pane in (left, right):
+            ttk.Label(pane, text="INTERNAL MISSIONS", style="Heading.TLabel").pack(anchor="w", pady=(0, 8))
+            canvas = tk.Canvas(pane, highlightthickness=0, bg="#d6d5bd")
+            scrollbar = ttk.Scrollbar(pane, orient="vertical", command=canvas.yview)
+            scrollbar.pack(side="right", fill="y")
+            canvas.pack(fill="both", expand=True)
+            canvas.configure(yscrollcommand=scrollbar.set)
+            panel = ttk.Frame(canvas, padding=8)
+            window = canvas.create_window((0, 0), window=panel, anchor="nw")
+            panel.bind("<Configure>", lambda _e, c=canvas: c.configure(scrollregion=c.bbox("all")))
+            canvas.bind("<Configure>", lambda e, c=canvas, w=window: c.itemconfigure(w, width=e.width))
+            def scroll(event, c=canvas):
+                c.yview_scroll(-int(event.delta / 120), "units")
+            canvas.bind("<MouseWheel>", scroll)
+            panel.bind("<MouseWheel>", scroll)
+            panels.append(panel)
+            scroll_handlers.append(scroll)
+        split = (len(MISSION_FLAGS) + 1) // 2
         for index, mission in enumerate(MISSION_FLAGS):
-            line = ttk.Frame(self.panel)
+            column = 0 if index < split else 1
+            line = ttk.Frame(panels[column])
             line.pack(fill="x", pady=4)
             check = ttk.Checkbutton(
                 line,
-                text=mission.name,
+                text=mission.name.split(" / ", 1)[0],
                 variable=self.vars[index],
                 command=lambda i=index: self.changed(i),
             )
             check.pack(anchor="w")
-            check.bind("<FocusIn>", lambda _e, i=index: self.show_mission_details(i))
-            check.bind("<MouseWheel>", scroll)
-            ttk.Label(line, text=mission.note, foreground="#777").pack(anchor="w", padx=22)
-        sbm_line = ttk.Frame(self.panel)
+            check.bind("<MouseWheel>", scroll_handlers[column])
+        sbm_line = ttk.Frame(panels[1])
         sbm_line.pack(fill="x", pady=4)
         ttk.Checkbutton(
             sbm_line,
@@ -334,24 +339,7 @@ class InternalMissionTab(ttk.Frame):
             variable=self.sbm_var,
             command=self.sbm_changed,
         ).pack(side="left")
-        ttk.Label(sbm_line, text=SBM_PROFILE.note, foreground="#a04b35").pack(anchor="w", padx=22)
         self.session.subscribe(self.refresh)
-
-    def show_mission_details(self, index: int) -> None:
-        mission = MISSION_FLAGS[index]
-        reference = MISSION_REFERENCE.get((mission.offsets[0], mission.mask))
-        text = f"{mission.name}\n\n{mission.note}\n\n"
-        if reference:
-            text += reference["reference_text"] + "\n\n"
-        if mission.note.startswith("Experimental") or mission.note.startswith("Reference marks"):
-            text += "This switch uses the inferred reference-ID availability bitmap. Its mapping is not independently verified. Enabling visibility does not establish that the mission loads or works.\n\n"
-        if "CROSS BATTLE" in mission.name:
-            text += "Install PeaceWalkerCrossBattleInputTest_v1.asi for the accepted initialization/input fix.\n\n"
-        text += f"Save offset: {mission.offsets[0]:#x} / mask: {mission.mask:#x}"
-        self.details.configure(state="normal")
-        self.details.delete("1.0", "end")
-        self.details.insert("end", text)
-        self.details.configure(state="disabled")
 
     def flag_value(self, mission: MissionFlag) -> bool:
         assert self.session.data is not None
@@ -369,7 +357,6 @@ class InternalMissionTab(ttk.Frame):
         self.sbm_var.set(all(self.session.data[offset] == value for offset, value in SBM_PROFILE.writes))
 
     def changed(self, index: int) -> None:
-        self.show_mission_details(index)
         if self.session.data is None:
             messagebox.showinfo("No save open", "Open a save first.")
             self.vars[index].set(False)
