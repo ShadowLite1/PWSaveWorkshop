@@ -1,0 +1,910 @@
+{
+  "source": "loadout_catalogs/items.json (extracted game OLANG)",
+  "notes": [
+    "Text references are NOT costume save IDs.",
+    "Regional, dummy and cut-content names do not establish usable PC models.",
+    "Only Escort is independently confirmed here against the supplied Versus save.",
+    "Existing ESW uniform mappings require individual verification; do not infer IDs from list order."
+  ],
+  "costumes": [
+    {
+      "name": "J.FATIGUES",
+      "text_references": [
+        {
+          "quote_id": 373,
+          "key_hash": "0000DD"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "BLACK",
+      "text_references": [
+        {
+          "quote_id": 376,
+          "key_hash": "0000DB"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "KHAKI",
+      "text_references": [
+        {
+          "quote_id": 377,
+          "key_hash": "0000DA"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NAVY BLUE",
+      "text_references": [
+        {
+          "quote_id": 378,
+          "key_hash": "0000D9"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "WHITE",
+      "text_references": [
+        {
+          "quote_id": 379,
+          "key_hash": "0000D8"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "RED",
+      "text_references": [
+        {
+          "quote_id": 380,
+          "key_hash": "0000D7"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "YELLOW",
+      "text_references": [
+        {
+          "quote_id": 381,
+          "key_hash": "0000D6"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "PINK",
+      "text_references": [
+        {
+          "quote_id": 382,
+          "key_hash": "0000D5"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "GREEN",
+      "text_references": [
+        {
+          "quote_id": 383,
+          "key_hash": "0000D4"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "LEAF",
+      "text_references": [
+        {
+          "quote_id": 384,
+          "key_hash": "0000D3"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "T.STRIPE",
+      "text_references": [
+        {
+          "quote_id": 385,
+          "key_hash": "0000D2"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "WATER",
+      "text_references": [
+        {
+          "quote_id": 388,
+          "key_hash": "0000D0"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "CHOCO-CHIP",
+      "text_references": [
+        {
+          "quote_id": 389,
+          "key_hash": "0000CF"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "AUSCAM",
+      "text_references": [
+        {
+          "quote_id": 390,
+          "key_hash": "0000CE"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SQUARES",
+      "text_references": [
+        {
+          "quote_id": 391,
+          "key_hash": "0000CD"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "TREE BARK",
+      "text_references": [
+        {
+          "quote_id": 392,
+          "key_hash": "0000CC"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SPLITTER",
+      "text_references": [
+        {
+          "quote_id": 393,
+          "key_hash": "0000CB"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SNAKE",
+      "text_references": [
+        {
+          "quote_id": 394,
+          "key_hash": "0000CA"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "COMRADE",
+      "text_references": [
+        {
+          "quote_id": 395,
+          "key_hash": "0000C9"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "G&J",
+      "text_references": [
+        {
+          "quote_id": 396,
+          "key_hash": "0000C8"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "LOVE BOX",
+      "text_references": [
+        {
+          "quote_id": 398,
+          "key_hash": "000002"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NEO MOSS",
+      "text_references": [
+        {
+          "quote_id": 399,
+          "key_hash": "0000C7"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "STENCH",
+      "text_references": [
+        {
+          "quote_id": 401,
+          "key_hash": "0000C5"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "TIGREX",
+      "text_references": [
+        {
+          "quote_id": 402,
+          "key_hash": "0000C4"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "RATHALOS",
+      "text_references": [
+        {
+          "quote_id": 403,
+          "key_hash": "0000C3"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "GEAR REX",
+      "text_references": [
+        {
+          "quote_id": 404,
+          "key_hash": "0000C2"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SNEAKING",
+      "text_references": [
+        {
+          "quote_id": 405,
+          "key_hash": "0000C1"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "BATTLE",
+      "text_references": [
+        {
+          "quote_id": 406,
+          "key_hash": "0000C0"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "BATTLE W/H",
+      "text_references": [
+        {
+          "quote_id": 407,
+          "key_hash": "0000BF"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NAKED",
+      "text_references": [
+        {
+          "quote_id": 408,
+          "key_hash": "0000BE"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(BLACK)",
+      "text_references": [
+        {
+          "quote_id": 410,
+          "key_hash": "0000BD"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(KHAKI)",
+      "text_references": [
+        {
+          "quote_id": 411,
+          "key_hash": "0000BC"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(N.BLU)",
+      "text_references": [
+        {
+          "quote_id": 413,
+          "key_hash": "0000BA"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(WHITE)",
+      "text_references": [
+        {
+          "quote_id": 414,
+          "key_hash": "0000B9"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(RED)",
+      "text_references": [
+        {
+          "quote_id": 415,
+          "key_hash": "0000B8"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(YELW)",
+      "text_references": [
+        {
+          "quote_id": 416,
+          "key_hash": "0000B7"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(PINK)",
+      "text_references": [
+        {
+          "quote_id": 417,
+          "key_hash": "0000B6"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(GRN)",
+      "text_references": [
+        {
+          "quote_id": 418,
+          "key_hash": "0000B5"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(LEAF)",
+      "text_references": [
+        {
+          "quote_id": 419,
+          "key_hash": "0000B4"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(TIGER)",
+      "text_references": [
+        {
+          "quote_id": 421,
+          "key_hash": "0000B3"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(WATR)",
+      "text_references": [
+        {
+          "quote_id": 422,
+          "key_hash": "0000B2"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(CHOCO)",
+      "text_references": [
+        {
+          "quote_id": 423,
+          "key_hash": "0000B1"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(AUSY)",
+      "text_references": [
+        {
+          "quote_id": 426,
+          "key_hash": "0000AE"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(SQRS)",
+      "text_references": [
+        {
+          "quote_id": 427,
+          "key_hash": "0000AD"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(T.B)",
+      "text_references": [
+        {
+          "quote_id": 428,
+          "key_hash": "0000AC"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(SPLIT)",
+      "text_references": [
+        {
+          "quote_id": 429,
+          "key_hash": "0000AB"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(SNAKE)",
+      "text_references": [
+        {
+          "quote_id": 430,
+          "key_hash": "0000AA"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "TUXEDO",
+      "text_references": [
+        {
+          "quote_id": 432,
+          "key_hash": "0000A9"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "MILLER",
+      "text_references": [
+        {
+          "quote_id": 433,
+          "key_hash": "0000A8"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "AMANDA",
+      "text_references": [
+        {
+          "quote_id": 434,
+          "key_hash": "0000A7"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SWIM TRNKS",
+      "text_references": [
+        {
+          "quote_id": 435,
+          "key_hash": "0000A6"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "BIKINI TOP",
+      "text_references": [
+        {
+          "quote_id": 436,
+          "key_hash": "0000A5"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425A)",
+      "text_references": [
+        {
+          "quote_id": 438,
+          "key_hash": "0000A3"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425B)",
+      "text_references": [
+        {
+          "quote_id": 439,
+          "key_hash": "0000A2"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425C)",
+      "text_references": [
+        {
+          "quote_id": 440,
+          "key_hash": "0000A1"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425D)",
+      "text_references": [
+        {
+          "quote_id": 441,
+          "key_hash": "0000A0"
+        },
+        {
+          "quote_id": 454,
+          "key_hash": "000095"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "JIGSAW",
+      "text_references": [
+        {
+          "quote_id": 442,
+          "key_hash": "000010"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425E)",
+      "text_references": [
+        {
+          "quote_id": 443,
+          "key_hash": "00009F"
+        },
+        {
+          "quote_id": 444,
+          "key_hash": "00009E"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425F)",
+      "text_references": [
+        {
+          "quote_id": 445,
+          "key_hash": "00009D"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425G)",
+      "text_references": [
+        {
+          "quote_id": 446,
+          "key_hash": "00009C"
+        },
+        {
+          "quote_id": 455,
+          "key_hash": "000094"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425H)",
+      "text_references": [
+        {
+          "quote_id": 447,
+          "key_hash": "00009B"
+        },
+        {
+          "quote_id": 448,
+          "key_hash": "00009A"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425J)",
+      "text_references": [
+        {
+          "quote_id": 450,
+          "key_hash": "000098"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(N425L)",
+      "text_references": [
+        {
+          "quote_id": 451,
+          "key_hash": "000097"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "UT(LOGO)",
+      "text_references": [
+        {
+          "quote_id": 452,
+          "key_hash": "000096"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "T-SHIRT",
+      "text_references": [
+        {
+          "quote_id": 456,
+          "key_hash": "000093"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "(dummy)",
+      "text_references": [
+        {
+          "quote_id": 457,
+          "key_hash": "000092"
+        },
+        {
+          "quote_id": 458,
+          "key_hash": "000091"
+        },
+        {
+          "quote_id": 459,
+          "key_hash": "000090"
+        },
+        {
+          "quote_id": 467,
+          "key_hash": "000089"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "DPM",
+      "text_references": [
+        {
+          "quote_id": 462,
+          "key_hash": "00008D"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "NKD(DPM)",
+      "text_references": [
+        {
+          "quote_id": 465,
+          "key_hash": "00008B"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "FOX",
+      "text_references": [
+        {
+          "quote_id": 468,
+          "key_hash": "000088"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "R.COMMANDO",
+      "text_references": [
+        {
+          "quote_id": 469,
+          "key_hash": "000087"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "R.SOLDIER",
+      "text_references": [
+        {
+          "quote_id": 470,
+          "key_hash": "000086"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "SCOUT",
+      "text_references": [
+        {
+          "quote_id": 471,
+          "key_hash": "000085"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "GUARD",
+      "text_references": [
+        {
+          "quote_id": 472,
+          "key_hash": "000084"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "COMMANDO",
+      "text_references": [
+        {
+          "quote_id": 474,
+          "key_hash": "000082"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "M.POW",
+      "text_references": [
+        {
+          "quote_id": 476,
+          "key_hash": "000081"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "PATROLMAN",
+      "text_references": [
+        {
+          "quote_id": 477,
+          "key_hash": "000080"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "F.POW",
+      "text_references": [
+        {
+          "quote_id": 478,
+          "key_hash": "00007F"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "MECHANIC",
+      "text_references": [
+        {
+          "quote_id": 479,
+          "key_hash": "00007E"
+        }
+      ],
+      "save_id": null,
+      "status": "name-only"
+    },
+    {
+      "name": "ESCORT",
+      "text_references": [
+        {
+          "quote_id": 480,
+          "key_hash": "00007D"
+        }
+      ],
+      "save_id": "55",
+      "status": "save-confirmed",
+      "save_offset": "B5E8",
+      "mode": "MSF Soldier - Versus Ops"
+    }
+  ]
+}
