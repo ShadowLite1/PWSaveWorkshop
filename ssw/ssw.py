@@ -121,7 +121,7 @@ VERSUS_ROLE_UNIFORMS = {
     52: "M.POW (inferred)",
     53: "PATROLMAN (inferred)",
     54: "MECHANIC (inferred)",
-    55: "ESCORT (confirmed)",
+    0x55: "ESCORT (confirmed)",
 }
 VERSUS_ROLE_UNIFORM_OFFSET = 0xB5E8
 LEAVE_ROLE_UNCHANGED = "Leave recruited-soldier role unchanged"
@@ -778,11 +778,21 @@ class LoadoutTab(ttk.Frame):
             weapon_value = struct.unpack_from("<H", self.session.data, base + WEAPON_OFFSET + slot * 2)[0]
             self.weapon_boxes[slot]["values"] = weapon_choices
             self.weapons[slot].set(f"{weapon_value:04X} — {WEAPONS.get(weapon_value, 'Unmapped storage ID')}")
-        uniform_value = self.session.data[UNIFORM_OFFSETS[0]]
-        self.uniform.set(f"{uniform_value:02X} — {UNIFORMS.get(uniform_value, 'Unmapped')}")
+        msf_versus = self.mode.get() == "MSF Soldier - Versus Ops"
+        uniform_catalog = VERSUS_ROLE_UNIFORMS if msf_versus else UNIFORMS
+        uniform_offset = VERSUS_ROLE_UNIFORM_OFFSET if msf_versus else (
+            UNIFORM_OFFSETS[2] if self.mode.get().endswith("Versus Ops") else UNIFORM_OFFSETS[0]
+        )
+        uniform_value = self.session.data[uniform_offset]
+        uniform_choices = [f"{key:02X} — {name}" for key, name in uniform_catalog.items()]
+        current_uniform = f"{uniform_value:02X} — {uniform_catalog.get(uniform_value, 'Unmapped (preserve current)')}"
+        if current_uniform not in uniform_choices:
+            uniform_choices.append(current_uniform)
+        self.uniform_box.configure(values=uniform_choices)
+        self.uniform.set(current_uniform)
         if self.mode.get().endswith("Versus Ops"):
             self.soldier_box.configure(state="disabled")
-            self.uniform_box.configure(state="disabled" if self.mode.get() == "MSF Soldier - Versus Ops" else "readonly")
+            self.uniform_box.configure(state="readonly")
             self.versus_role_box.configure(state="readonly")
             self.mapping_status.set(
                 "MSF Versus preset at 0xB8A2: confirmed against RAVEN's saved M16A1(STG), C4 and Claymore loadout. "
@@ -837,19 +847,23 @@ class LoadoutTab(ttk.Frame):
                     struct.pack_into("<H", self.session.data, base + WEAPON_OFFSET + slot * 2, weapon_values[slot])
             if self.mode.get().endswith("Versus Ops") or self.mode.get() == "Snake - Coop":
                 uniform_value = int(self.uniform.get().split("—", 1)[0].strip(), 16)
-                if uniform_value not in UNIFORMS:
+                msf_versus = self.mode.get() == "MSF Soldier - Versus Ops"
+                uniform_catalog = VERSUS_ROLE_UNIFORMS if msf_versus else UNIFORMS
+                current_offset = VERSUS_ROLE_UNIFORM_OFFSET if msf_versus else (
+                    UNIFORM_OFFSETS[2] if self.mode.get().endswith("Versus Ops") else UNIFORM_OFFSETS[0]
+                )
+                if uniform_value not in uniform_catalog and uniform_value != self.session.data[current_offset]:
                     raise ValueError(f"Unknown Versus uniform ID {uniform_value:02X}")
                 # These three bytes are not mirrors. Controlled captures show
                 # B5E4 = Campaign/Co-op uniform, B5E8 = recruited-soldier
                 # Versus role, and B7D2 = Versus uniform. Writing one uniform
                 # into all three can crash when Mission Prep is unloaded.
                 uniform_offset = (
-                    UNIFORM_OFFSETS[2]
+                    VERSUS_ROLE_UNIFORM_OFFSET if msf_versus else UNIFORM_OFFSETS[2]
                     if self.mode.get().endswith("Versus Ops")
                     else UNIFORM_OFFSETS[0]
                 )
-                if self.mode.get() != "MSF Soldier - Versus Ops":
-                    self.session.data[uniform_offset] = uniform_value
+                self.session.data[uniform_offset] = uniform_value
                 role_text = self.versus_role_uniform.get()
                 if role_text != LEAVE_ROLE_UNCHANGED:
                     role_value = int(role_text.split("—", 1)[0].strip(), 16)
