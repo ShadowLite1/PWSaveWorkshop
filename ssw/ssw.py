@@ -479,7 +479,6 @@ class LoadoutTab(ttk.Frame):
         )
         self.versus_role_box.pack(side="left", padx=10)
         self.mapping_status = tk.StringVar()
-        ttk.Label(self, textvariable=self.mapping_status, wraplength=1000).pack(anchor="w", pady=(0, 8))
         actions = ttk.Frame(self)
         actions.pack(anchor="w")
         ttk.Button(actions, text="APPLY PRESET", command=self.apply).pack(side="left")
