@@ -8,6 +8,7 @@ import re
 import threading
 import queue
 import urllib.request
+import urllib.error
 import webbrowser
 import tkinter as tk
 from dataclasses import dataclass
@@ -937,13 +938,22 @@ class ASIInstallerTab(ttk.Frame):
 
     def download(self, names, destination):
         installed = []
+        bundled = []
         try:
             # Download and validate everything before changing the game folder.
             downloads = {}
             for name in names:
                 request = urllib.request.Request(self.DOWNLOAD_ROOT + name, headers={"User-Agent": "EspiritSaveWorkshop"})
-                with urllib.request.urlopen(request, timeout=30) as response:
-                    data = response.read(32 * 1024 * 1024 + 1)
+                try:
+                    with urllib.request.urlopen(request, timeout=30) as response:
+                        data = response.read(32 * 1024 * 1024 + 1)
+                except (urllib.error.URLError, OSError) as exc:
+                    plugin_root = Path(sys.executable).parent if getattr(sys, "frozen", False) else ROOT
+                    local = plugin_root / "asi" / name
+                    if not local.is_file():
+                        raise OSError(f"GitHub download unavailable for {name}; no bundled copy found. {exc}") from exc
+                    data = local.read_bytes()
+                    bundled.append(name)
                 if not data.startswith(b"MZ") or len(data) > 32 * 1024 * 1024:
                     raise ValueError(f"Invalid ASI download: {name}")
                 downloads[name] = data
@@ -966,7 +976,8 @@ class ASIInstallerTab(ttk.Frame):
                 temporary.write_bytes(data)
                 temporary.replace(target)
                 installed.append(name)
-            self.results.put((True, f"Installed {len(installed)} ASIs in {destination}. Restart the game to load them."))
+            source_note = " Used bundled copies because GitHub downloads were unavailable." if bundled else " Downloaded from GitHub."
+            self.results.put((True, f"Installed {len(installed)} ASIs in {destination}.{source_note} Restart the game to load them."))
         except Exception as exc:
             self.results.put((False, f"Installed {len(installed)} ASIs. Download/install failed: {exc}"))
 
