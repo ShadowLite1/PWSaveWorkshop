@@ -901,6 +901,14 @@ class ASIInstallerTab(ttk.Frame):
         "PeaceWalkerStrikeTableTest.asi",
         "PeaceWalkerVersusEquipment.asi",
     )
+    DESCRIPTIONS = {
+        "PeaceWalkerCrossBattleInputTest.asi": "Restores Cross Battle input initialization so the mission can load and accept controls. Enable the mission with the Flag Editor restore button.",
+        "PeaceWalkerCustomQuotes.asi": "Loads custom soldier quotes saved by ESW alongside your save file.",
+        "PeaceWalkerEightSkills.asi": "Enables support for eight soldier skill slots configured in the Soldier Editor.",
+        "PeaceWalkerSevenSlots.asi": "Enables seven weapon and seven item slots during gameplay, including Co-op and Versus Ops.",
+        "PeaceWalkerStrikeTableTest.asi": "Enables Support Strike Marker functionality in Versus Ops; strike arrival has been tested.",
+        "PeaceWalkerVersusEquipment.asi": "Allows Co-op weapons and items in Versus Ops. Some special effects remain unsupported; ASSN and Rescue Box behavior is unfinished.",
+    }
 
     def __init__(self, parent):
         super().__init__(parent, padding=18)
@@ -909,10 +917,16 @@ class ASIInstallerTab(ttk.Frame):
         ttk.Label(self, text="An ASI loader must already be installed. Restart the game after installing plugins.").pack(anchor="w")
         ttk.Button(self, text="View ASIs on GitHub", command=lambda: webbrowser.open(self.REPOSITORY)).pack(anchor="w", pady=12)
         self.selections = {}
-        for name in self.PLUGINS:
+        plugin_rows = ttk.Frame(self)
+        plugin_rows.pack(fill="x", pady=(4, 0))
+        plugin_rows.columnconfigure(1, weight=1)
+        for row, name in enumerate(self.PLUGINS):
             variable = tk.BooleanVar()
             self.selections[name] = variable
-            ttk.Checkbutton(self, text=name, variable=variable).pack(anchor="w", pady=4)
+            ttk.Checkbutton(plugin_rows, text=name, variable=variable).grid(row=row, column=0, sticky="w", padx=(0, 16), pady=6)
+            description = ttk.Label(plugin_rows, text=self.DESCRIPTIONS[name], anchor="w", justify="left", padding=(8, 5))
+            description.grid(row=row, column=1, sticky="ew", pady=6)
+            description.bind("<Configure>", lambda event: event.widget.configure(wraplength=max(200, event.width - 16)))
         self.install_button = ttk.Button(self, text="Download and Install Selected ASIs", command=self.install)
         self.install_button.pack(anchor="w", pady=16)
         self.status = tk.StringVar(value="Select the plugins you want to install.")
