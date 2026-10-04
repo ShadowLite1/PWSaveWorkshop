@@ -905,7 +905,7 @@ class ASIInstallerTab(ttk.Frame):
         "PeaceWalkerEightSkills.asi": "Enables support for eight soldier skill slots configured in the Soldier Editor.",
         "PeaceWalkerSevenSlots.asi": "Enables seven weapon and seven item slots during gameplay, including Co-op and Versus Ops.",
         "PeaceWalkerStrikeTableTest.asi": "Enables Support Strike Marker functionality in Versus Ops; strike arrival has been tested.",
-        "PeaceWalkerVersusEquipment.asi": "Allows Co-op weapons and items in Versus Ops. Some special effects remain unsupported; ASSN and Rescue Box behavior is unfinished.",
+        "PeaceWalkerVersusEquipment.asi": "Allows Co-op weapons and items in Versus Ops. Some item effects may be unsupported or will crash.",
     }
 
     def __init__(self, parent):
