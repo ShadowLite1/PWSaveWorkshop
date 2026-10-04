@@ -10,6 +10,7 @@ import queue
 import urllib.request
 import urllib.error
 import webbrowser
+import os
 import tkinter as tk
 from dataclasses import dataclass
 from pathlib import Path
@@ -24,6 +25,58 @@ from save_cipher import derive_state, filename_checksum, transform
 from soldier_editor import SoldierEditor
 
 SAVE_SIZE = 0x4F950
+GAME_EXE = "METAL GEAR SOLID PEACE WALKER.exe"
+
+
+def detect_game_executable():
+    """Inspect Steam libraries and conventional locations, without scanning disks."""
+    steam_roots = [Path(os.environ.get("PROGRAMFILES(X86)", "C:/Program Files (x86)")) / "Steam"]
+    try:
+        import winreg
+        for hive, key, value in (
+            (winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam", "SteamPath"),
+            (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath"),
+        ):
+            try:
+                with winreg.OpenKey(hive, key) as handle:
+                    steam_roots.append(Path(winreg.QueryValueEx(handle, value)[0]))
+            except OSError:
+                pass
+    except ImportError:
+        pass
+    libraries = list(steam_roots)
+    for steam in steam_roots:
+        try:
+            text = (steam / "steamapps" / "libraryfolders.vdf").read_text(encoding="utf-8")
+            libraries.extend(Path(path.replace("\\\\", "\\")) for path in re.findall(r'"path"\s*"([^"]+)"', text))
+        except OSError:
+            pass
+    libraries.extend(Path(f"{drive}:/SteamLibrary") for drive in "CDEFGHIJKLMNOPQRSTUVWXYZ")
+    candidates = [Path(sys.executable).parent, Path.cwd()]
+    for library in dict.fromkeys(libraries):
+        common = library / "steamapps" / "common"
+        candidates.extend((common / "MGS_PW" / "mgspw", common / "MGS_PW"))
+    for directory in candidates:
+        executable = directory / GAME_EXE
+        if executable.is_file():
+            return executable
+    return None
+
+
+def choose_game_executable():
+    game = detect_game_executable()
+    if game is not None:
+        return game
+    chosen = filedialog.askopenfilename(title=f"Select {GAME_EXE}", filetypes=[("Game executable", "*.exe")])
+    if not chosen:
+        return None
+    game = Path(chosen)
+    if game.name.lower() != GAME_EXE.lower() or not game.is_file():
+        messagebox.showerror("Game installation", f"Select {GAME_EXE} in your game folder.")
+        return None
+    return game
+
+
 ROSTER_BASE = 0x1FA80
 ROSTER_RECORD_SIZE = 0xA0
 ROSTER_COUNT = 350
@@ -353,15 +406,8 @@ class InternalMissionTab(ttk.Frame):
         if not self.unlocked:
             if not messagebox.askyesno("Experimental debug features", WARNING, icon="warning"):
                 return
-        chosen = filedialog.askopenfilename(
-            title="Select METAL GEAR SOLID PEACE WALKER.exe",
-            filetypes=(("Peace Walker", "METAL GEAR SOLID PEACE WALKER.exe"), ("Applications", "*.exe")),
-        )
-        if not chosen:
-            return
-        game = Path(chosen)
-        if game.name.lower() != "metal gear solid peace walker.exe" or not game.is_file():
-            messagebox.showerror("Cross Battle", "Select the real Peace Walker game executable.")
+        game = choose_game_executable()
+        if game is None:
             return
         try:
             scripts = game.parent / "scripts"
@@ -928,6 +974,9 @@ class ASIInstallerTab(ttk.Frame):
         self.install_button = ttk.Button(self, text="Download and Install Selected ASIs", command=self.install)
         self.install_button.pack(anchor="w", pady=16)
         self.status = tk.StringVar(value="Select the plugins you want to install.")
+        detected_game = detect_game_executable()
+        self.location = tk.StringVar(value=f"Scripts folder: {detected_game.parent / 'scripts'}" if detected_game else "Game installation not detected. You will be asked to select the game executable.")
+        ttk.Label(self, textvariable=self.location).pack(anchor="w", pady=(0, 8))
         ttk.Label(self, textvariable=self.status).pack(anchor="w")
         self.results = queue.Queue()
 
@@ -936,13 +985,10 @@ class ASIInstallerTab(ttk.Frame):
         if not names:
             messagebox.showinfo("ASI Installer", "Select at least one ASI.")
             return
-        chosen = filedialog.askopenfilename(title="Select METAL GEAR SOLID PEACE WALKER.exe", filetypes=[("Game executable", "*.exe")])
-        if not chosen:
+        executable = choose_game_executable()
+        if executable is None:
             return
-        executable = Path(chosen)
-        if executable.name.lower() != "metal gear solid peace walker.exe" or not executable.is_file():
-            messagebox.showerror("ASI Installer", "Select METAL GEAR SOLID PEACE WALKER.exe in your game folder.")
-            return
+        self.location.set(f"Scripts folder: {executable.parent / 'scripts'}")
         self.install_button.configure(state="disabled")
         self.status.set("Downloading selected ASIs from GitHub…")
         threading.Thread(target=self.download, args=(names, executable.parent / "scripts"), daemon=True).start()
