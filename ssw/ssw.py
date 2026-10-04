@@ -337,7 +337,7 @@ class InternalMissionTab(ttk.Frame):
             return
         self.crossbattle_plugin_notice()
         plugin_root = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else ROOT
-        plugin = plugin_root / "asi" / "PeaceWalkerCrossBattleInputTest_v1.asi"
+        plugin = plugin_root / "asi" / "PeaceWalkerCrossBattleInputTest.asi"
         if not plugin.is_file():
             messagebox.showerror("Cross Battle", "The Cross Battle ASI is missing from the asi folder.")
             return
@@ -383,7 +383,7 @@ class InternalMissionTab(ttk.Frame):
     def crossbattle_plugin_notice() -> None:
         messagebox.showinfo(
             "Required plugin",
-            "In Order to restore this mission, you must install PeaceWalkerCrossBattleInputTest_v1.asi plugin.",
+            "In Order to restore this mission, you must install PeaceWalkerCrossBattleInputTest.asi plugin.",
         )
 
     def flag_value(self, mission: MissionFlag) -> bool:

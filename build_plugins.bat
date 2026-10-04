@@ -13,15 +13,15 @@ pushd "%TASKROOT%build\plugins"
 set "TASKMH=%TASKROOT%third_party\minhook"
 cl /nologo /O2 /MT /c /I"%TASKMH%\include" "%TASKMH%\src\buffer.c" "%TASKMH%\src\hook.c" "%TASKMH%\src\trampoline.c" "%TASKMH%\src\hde\hde64.c"
 if errorlevel 1 goto failed
-cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerSevenSlots.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerSevenSlots_v3.asi" /DLL
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerSevenSlots.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerSevenSlots.asi" /DLL
 if errorlevel 1 goto failed
 cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerEightSkills.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerEightSkills.asi" /DLL
 if errorlevel 1 goto failed
-cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerCrossBattleInputTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerCrossBattleInputTest_v1.asi" /DLL
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerCrossBattleInputTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerCrossBattleInputTest.asi" /DLL
 if errorlevel 1 goto failed
-cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerStrikeTableTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerStrikeTableTest_v1.asi" /DLL
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerStrikeTableTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerStrikeTableTest.asi" /DLL
 if errorlevel 1 goto failed
-cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerVersusEquipment.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerVersusEquipment_v4.asi" /DLL
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerVersusEquipment.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerVersusEquipment.asi" /DLL
 if errorlevel 1 goto failed
 popd
 exit /b 0
