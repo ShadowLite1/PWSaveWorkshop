@@ -894,7 +894,6 @@ class ASIInstallerTab(ttk.Frame):
     REPOSITORY = "https://github.com/ShadowLite1/PWSaveWorkshop/tree/main/asi"
     DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ShadowLite1/PWSaveWorkshop/main/asi/"
     PLUGINS = (
-        "PeaceWalkerCrossBattleInputTest.asi",
         "PeaceWalkerCustomQuotes.asi",
         "PeaceWalkerEightSkills.asi",
         "PeaceWalkerSevenSlots.asi",
@@ -902,7 +901,6 @@ class ASIInstallerTab(ttk.Frame):
         "PeaceWalkerVersusEquipment.asi",
     )
     DESCRIPTIONS = {
-        "PeaceWalkerCrossBattleInputTest.asi": "Restores Cross Battle input initialization so the mission can load and accept controls. Enable the mission with the Flag Editor restore button.",
         "PeaceWalkerCustomQuotes.asi": "Loads custom soldier quotes saved by ESW alongside your save file.",
         "PeaceWalkerEightSkills.asi": "Enables support for eight soldier skill slots configured in the Soldier Editor.",
         "PeaceWalkerSevenSlots.asi": "Enables seven weapon and seven item slots during gameplay, including Co-op and Versus Ops.",
