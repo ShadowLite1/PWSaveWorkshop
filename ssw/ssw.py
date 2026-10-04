@@ -300,30 +300,16 @@ class InternalMissionTab(ttk.Frame):
         right = ttk.Frame(self)
         right.grid(row=2, column=2, sticky="new", padx=(6, 0))
         panels = []
-        scroll_handlers = []
         for pane in (left, right):
-            group = ttk.LabelFrame(pane, text="Internal Missions", padding=8)
-            group.pack(fill="x", anchor="n")
-            canvas = tk.Canvas(group, height=200, highlightthickness=0, bg="#d6d5bd")
-            scrollbar = ttk.Scrollbar(group, orient="vertical", command=canvas.yview)
-            scrollbar.pack(side="right", fill="y")
-            canvas.pack(fill="both", expand=True)
-            canvas.configure(yscrollcommand=scrollbar.set)
-            panel = ttk.Frame(canvas, padding=4)
-            window = canvas.create_window((0, 0), window=panel, anchor="nw")
-            panel.bind("<Configure>", lambda _e, c=canvas: c.configure(scrollregion=c.bbox("all")))
-            canvas.bind("<Configure>", lambda e, c=canvas, w=window: c.itemconfigure(w, width=e.width))
-            def scroll(event, c=canvas):
-                c.yview_scroll(-int(event.delta / 120), "units")
-            canvas.bind("<MouseWheel>", scroll)
-            panel.bind("<MouseWheel>", scroll)
+            ttk.Label(pane, text="Internal Missions").pack(anchor="w", pady=(0, 8))
+            panel = ttk.Frame(pane)
+            panel.pack(fill="x", anchor="n")
             panels.append(panel)
-            scroll_handlers.append(scroll)
         split = (len(MISSION_FLAGS) + 1) // 2
         for index, mission in enumerate(MISSION_FLAGS):
             column = 0 if index < split else 1
             line = ttk.Frame(panels[column])
-            line.pack(fill="x", pady=4)
+            line.pack(fill="x", pady=0)
             check = ttk.Checkbutton(
                 line,
                 text=mission.name.split(" / ", 1)[0],
@@ -331,9 +317,8 @@ class InternalMissionTab(ttk.Frame):
                 command=lambda i=index: self.changed(i),
             )
             check.pack(anchor="w")
-            check.bind("<MouseWheel>", scroll_handlers[column])
         sbm_line = ttk.Frame(panels[1])
-        sbm_line.pack(fill="x", pady=4)
+        sbm_line.pack(fill="x", pady=0)
         ttk.Checkbutton(
             sbm_line,
             text=SBM_PROFILE.name,
