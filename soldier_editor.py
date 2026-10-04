@@ -1765,7 +1765,7 @@ class SoldierEditor(ttk.Frame):
             | {self.data[self.record_start(i) + ASSIGNMENT_OFFSET] for i in range(RECORD_COUNT)}
         )
         type_values = sorted(set(SOLDIER_TYPES) | {self.data[self.record_start(i) + SOLDIER_TYPE_OFFSET] for i in range(RECORD_COUNT)})
-        service_values = sorted(set(SERVICE_TYPES) | {self.data[self.record_start(i) + SERVICE_TYPE_OFFSET] for i in range(RECORD_COUNT)})
+        service_values = sorted(SERVICE_TYPES)
         self.soldier_type_box.configure(values=[enum_label(v, SOLDIER_TYPES) for v in type_values])
         self.service_type_box.configure(values=[service_type_label(v) for v in service_values])
         self.sex_box.configure(values=list(SEXES.values()))
@@ -2006,7 +2006,7 @@ class SoldierEditor(ttk.Frame):
         portrait_pair = (record[PORTRAIT_SET_OFFSET], record[PORTRAIT_FACE_OFFSET])
         self.portrait_choice_var.set(self.portrait_choice_by_code.get(portrait_pair, "Portrait unavailable"))
         self.soldier_type_var.set(enum_label(record[SOLDIER_TYPE_OFFSET], SOLDIER_TYPES))
-        self.service_type_var.set(service_type_label(record[SERVICE_TYPE_OFFSET]))
+        self.service_type_var.set(SERVICE_TYPES.get(record[SERVICE_TYPE_OFFSET], ""))
         self.sex_var.set(SEXES[record[SEX_OFFSET] & 1])
         condition_flags = record[CONDITION_FLAGS_OFFSET]
         self.condition_var.set(
@@ -2114,7 +2114,11 @@ class SoldierEditor(ttk.Frame):
                 raise ValueError("Choose an available portrait")
             portrait_set, portrait_face = self.portrait_choices[portrait_choice]
             soldier_type = enum_value(self.soldier_type_var.get(), "Soldier class")
-            service_type = enum_value(self.service_type_var.get(), "Acquisition method")
+            service_type = (
+                enum_value(self.service_type_var.get(), "Acquisition method")
+                if self.service_type_var.get().strip()
+                else self.data[start + SERVICE_TYPE_OFFSET]
+            )
             sex = enum_value(self.sex_var.get(), "Sex")
             fixed_quote_id = FIXED_CLASS_QUOTE_IDS.get(soldier_type)
             if fixed_quote_id is None:
