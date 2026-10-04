@@ -1,0 +1,520 @@
+{
+  "source": "MGS Peace Walker Mission IDs.txt",
+  "source_sha256": "13806823eeda83cfa3cbdeea5b4e2be1c97da04b62117706b7f53f44b41e8b90",
+  "count": 64,
+  "entries": [
+    {
+      "reference_id_decimal": 23,
+      "reference_id_hex": "17",
+      "title": "m0230/(tentative) Chase Metal Gear",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [23] \r\nHEX: [17] \r\nm0230/(tentative) Chase Metal Gear\r\nm0230/Chase Metal Gear/Contents\r\n---------------------------------------\r\nCosta Rica / Mine disguised base / Mine"
+    },
+    {
+      "reference_id_decimal": 35,
+      "reference_id_hex": "23",
+      "title": "m0410/(tentative) True Mastermind ED",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [35] \r\nHEX: [23] \r\nm0410/(tentative) True Mastermind ED\r\nm0410/(tentative) True Mastermind ED/Contents\r\n---------------------------------------\r\nNicaragua, US military missile base / Runway"
+    },
+    {
+      "reference_id_decimal": 39,
+      "reference_id_hex": "27",
+      "title": "[EXTRA OPS: Deleted] Target shooting",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [39] \r\nHEX: [27] \r\n[EXTRA OPS: Deleted] Target shooting\r\nShoot all targets (targets) around the ruins (Lluinas de Xochiquetzal) <C=FF4040>\r\nTime limit: 01'00\" (+00'03\" to +00'07\" when shooting at targets)\r\nNumber of targets: 20\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Lluinas de Xochiquetzal"
+    },
+    {
+      "reference_id_decimal": 51,
+      "reference_id_hex": "33",
+      "title": "[EXTRA OPS: Lost] Legacy of the Dead",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [51] \r\nHEX: [33] \r\n[EXTRA OPS: Lost] Legacy of the Dead\r\nCollect <C=FF4040>items in the area of ​​the ruins (Lhuinas de Xochiquetzal) of the Cloud Forest in Central Heredia.\r\nBeware of ghosts.\r\nThe use of all <C=FF4040>LIFE recovery items is prohibited.\r\nTime limit: 03'00\" (-00'30\" if an alert is issued after enemy detection)\r\nNumber of targets: 3\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Lhuinas de Xochiquetzal"
+    },
+    {
+      "reference_id_decimal": 58,
+      "reference_id_hex": "3A",
+      "title": "[EXTRA OPS: Lost] Fulton Collection",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [58] \r\nHEX: [3a]\r\n[EXTRA OPS: Lost] Fulton Collection\r\nCollect Prisoners of War in the designated area of ​​the Cloud Forest in Central Heredia. Rescue the <C=FF4040>FSLN\r\n(Sandinista) soldiers who are in the \"war\" status with the Fulton Recovery <C=R>.\r\n\r\nTime limit: 05'00\"\r\n(Until the prisoners are transferred. If the enemy finds you and alerts you, it will be -01'00\")\r\n\r\nRequired equipment: <C=FF4040>Fulton Recovery Device <C=R>\r\n\r\nNumber of targets: 1\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Selva de la Muerte / On top of the cliff"
+    },
+    {
+      "reference_id_decimal": 62,
+      "reference_id_hex": "3E",
+      "title": "sbm027/Go to the goal with the prisoners ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [62] \r\nHEX: [3e] \r\nsbm027/Go to the goal with the prisoners ×\r\nsbm027 content/Go to the goal with the prisoners (researcher, centipede possible, new radar development personnel), funnel\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 63,
+      "reference_id_hex": "3F",
+      "title": "sbm028/Go to the goal with the prisoners ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [63] \r\nHEX: [3f] \r\nsbm028/Go to the goal with the prisoners ×\r\nsbm028/Go to the goal with the prisoners ×\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 64,
+      "reference_id_hex": "40",
+      "title": "[EXTRA OPS: Deleted] Fulton Recovery",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [64] \r\nHEX: [40] \r\n[EXTRA OPS: Deleted] Fulton Recovery\r\nRescue the prisoners held in the cell in the mining base.\r\n\r\nTime limit: 03'00\"\r\n\r\nRequired equipment: Fulton recovery device\r\n\r\nNumber of targets: 3\r\n---------------------------------------\r\nCosta Rica, mining base / AI weapon hangar"
+    },
+    {
+      "reference_id_decimal": 66,
+      "reference_id_hex": "42",
+      "title": "sbm031/Forced battle, defend broken boxes ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [66] \r\nHEX: [42]\r\nsbm031/Forced battle, defend broken boxes ×\r\nsbm031 contents/Forced battle, defend broken boxes\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 69,
+      "reference_id_hex": "45",
+      "title": "[EXTRA OPS: Deleted] Defense of important supplies",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [69] \r\nHEX: [45] \r\n[EXTRA OPS: Deleted] Defense of important supplies\r\nProtect the items from enemy mercenaries <C=FF4040> who are attacking the mining settlement area, and eliminate them <C=R>\r\n\r\nIf three items <C=FF4040> are taken, the mission will fail <C=R>.\r\nNumber of targets: 10 (number of enemy soldiers)\r\n---------------------------------------\r\nCosta Rica, mining base / mining residential area"
+    },
+    {
+      "reference_id_decimal": 70,
+      "reference_id_hex": "46",
+      "title": "sbm035/Forced battle, defense funnels also appear in the base area ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [70] \r\nHEX: [46] \r\nsbm035/Forced battle, defense funnels also appear in the base area ×\r\nsbm035 content/Forced battle, defense funnels also appear in the base area\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nCosta Rica, Limon East / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 74,
+      "reference_id_hex": "4A",
+      "title": "sbm039/AI hacking ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [74] \r\nHEX: [4a] \r\nsbm039/AI hacking ×\r\nsbm039 content/AI hacking\r\nTake the prisoner (researcher) to the panel with the centipede and have him hack it. During hacking, you will fight enemy soldiers (funnels).\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 75,
+      "reference_id_hex": "4B",
+      "title": "[EXTRA OPS: Deleted] Target Destruction",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [75] \r\nHEX: [4b]\r\n[EXTRA OPS: Deleted] Target Destruction\r\nDestruct the <C=FF4040>specified target<C=R> inside the enemy base.\r\n\r\nThe target can only be destroyed with <C=FF4040>C4 bombs<C=R>.\r\nTime limit: 03'00\" (-00'30\" if the enemy detects you and alerts you)\r\nWeapon required: <C=FF4040>C4 bomb<C=R>\r\nNumber of targets: 1\r\n---------------------------------------\r\nUS missile base in Nicaragua / Maintenance dock (small)"
+    },
+    {
+      "reference_id_decimal": 76,
+      "reference_id_hex": "4C",
+      "title": "[EXTRA OPS: Deleted] Target demolition",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [76] \r\nHEX: [4c] \r\n[EXTRA OPS: Deleted] Target demolition\r\nDemolish the <C=FF4040>designated target in the coastal supply delivery facility (Puerto del Alba) area. The target can only be destroyed with <C=FF4040>C4 bomb<C=R>.\r\nTime limit: 03'00\" (-00'15\" if the enemy detects you and alerts you)\r\nRequired weapon: <C=FF4040>C4 bomb<C=R>\r\nNumber of targets: 1\r\n---------------------------------------\r\nCaribbean coast of Costa Rica / Puerto del Alba"
+    },
+    {
+      "reference_id_decimal": 79,
+      "reference_id_hex": "4F",
+      "title": "[EXTRA OPS: Deleted] Target demolition",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [79] \r\nHEX: [4f]\r\n[EXTRA OPS: Deleted] Target demolition\r\nDemolish the <C=FF4040>specified target in the banana plantation (Bananale Fruta de Oro). The target can only be destroyed with <C=FF4040>C4 bomb<C=R>.\r\nTime limit: 03'00\" (-00'30\" if the enemy finds you and alerts you)\r\nRequired weapon: <C=FF4040>C4 bomb<C=R>\r\nNumber of targets: 1\r\n---------------------------------------\r\nEast Limon, Costa Rica / Bananer Fruta de Oro / Sorting Station"
+    },
+    {
+      "reference_id_decimal": 80,
+      "reference_id_hex": "50",
+      "title": "sbm045/Destroy the Jungle Train with a bomb ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [80] \r\nHEX: [50] \r\nsbm045/Destroy the Jungle Train with a bomb ×\r\nContents of sbm045/Destroy the Jungle Train with a bomb\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 87,
+      "reference_id_hex": "57",
+      "title": "[EXTRA OPS: Deleted] Enemy Soldiers Annihilation",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [87] \r\nHEX: [57] \r\n[EXTRA OPS: Deleted] Enemy Soldiers Annihilation\r\nNeutralize <C=R> all enemy mercenaries <C=FF4040>in the area surrounding Banana Plantation (Bananer Fruta de Oro). Stunning, putting them to sleep, or other methods other than killing them are fine.\r\nTime limit: 10'00\" (-02'00 if the enemy detects you and alerts you)\r\nNumber of targets: 13\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 90,
+      "reference_id_hex": "5A",
+      "title": "sbm055/Forced battle, to the goal ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [90] \r\nHEX: [5a] \r\nsbm055/Forced battle, to the goal ×\r\nsbm055 content/Forced battle, to the goal\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 95,
+      "reference_id_hex": "5F",
+      "title": "sbm060/Eliminate the gun turret ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [95] \r\nHEX: [5f] \r\nsbm060/Eliminate the gun turret ×\r\nsbm060 content/Eliminate the gun turret\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 96,
+      "reference_id_hex": "60",
+      "title": "sbm061/Destroying cardboard boxes ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [96]\r\nHEX: [60]\r\n sbm061/Destroying cardboard boxes ×\r\nsbm061 contents/Destroying cardboard boxes\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 97,
+      "reference_id_hex": "61",
+      "title": "[EXTRA OPS: Deleted] Item collection",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [97] \r\nHEX: [61] \r\n[EXTRA OPS: Deleted] Item collection\r\nCollect all <C=FF4040>items (targets) in the enemy alert zone in central Heredia and bring them to the target point (goal) <C=R>.\r\nThe location of all <C=FF4040>items has been identified <C=R>.\r\nUse your time effectively.\r\nTime limit: 08'00\" (-0'30\" if the enemy detects you and alerts you)\r\nNumber of targets: 9\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Selva de la Leche / Jungle"
+    },
+    {
+      "reference_id_decimal": 98,
+      "reference_id_hex": "62",
+      "title": "[EXTRA OPS: Deleted] One Shot",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [98] \r\nHEX: [62] \r\n[EXTRA OPS: Deleted] One Shot\r\nDestroy all enemy mercenaries on the suspension bridge in El Senagal, east of Limon, with a single bullet.\r\nTime limit: 01'30\"\r\nNumber of targets: 2\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Canyon"
+    },
+    {
+      "reference_id_decimal": 100,
+      "reference_id_hex": "64",
+      "title": "[EXTRA OPS: Deleted] One Shot",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [100] \r\nHEX: [64] \r\n[EXTRA OPS: Deleted] One Shot\r\nDestroy all enemy mercenaries in Catarata de la Muerte, the tropical cloud forest in central Heredia, with one bullet.\r\nTime limit: 01'00\"\r\nNumber of targets: 3\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Catarata de la Muerte"
+    },
+    {
+      "reference_id_decimal": 101,
+      "reference_id_hex": "65",
+      "title": "sbm066/Exorcise ghosts with words (apologizing) (night) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [101] \r\nHEX: [65]\r\nsbm066/Exorcise ghosts with words (apologizing) (night) ×\r\nContents of sbm066/Exorcise ghosts with words (apologizing) (night)\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 102,
+      "reference_id_hex": "66",
+      "title": "[EXTRA OPS: Unused] Ghost Photo",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [102] \r\nHEX: [66] \r\n[EXTRA OPS: Unused] Ghost Photo\r\nTake a photo of the wandering ghost near the ruins (Lluinas de Xochiquetzal) in the cloud forest in central Heredia.\r\nThe ghost reacts to radar that visualizes sound.\r\n\r\nTime limit:\r\n\r\nWeapon required:\r\n\r\nEquipment required: Camera\r\n\r\nNumber of targets:\r\n---------------------------------------\r\nCentral Heredia, Costa Rica / Lluinas de Xochiquetzal"
+    },
+    {
+      "reference_id_decimal": 104,
+      "reference_id_hex": "68",
+      "title": "[EXTRA OPS: Unused] Ghost Photo",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [104] \r\nHEX: [68] \r\n[EXTRA OPS: Unused] Ghost Photo\r\nTake a photo of the wandering ghost in the cloud forest in central Heredia.\r\nThe ghost reacts to radar that visualizes sound.\r\nThe use of all <C=FF4040>LIFE recovery items is prohibited <C=R>.\r\nRequired equipment: Camera\r\nNumber of targets: 1\r\n---------------------------------------"
+    },
+    {
+      "reference_id_decimal": 106,
+      "reference_id_hex": "6A",
+      "title": "sbm071/Photography (take a peace sign) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [106] \r\nHEX: [6a] \r\nsbm071/Photography (take a peace sign) ×\r\nsbm071 contents/Photography (take a peace sign)\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\n\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 107,
+      "reference_id_hex": "6B",
+      "title": "sbm072/Spooky Game (missile interception) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [107] \r\nHEX: [6b] \r\nsbm072/Spooky Game (missile interception) ×\r\nsbm072 contents/Spooky Game (missile interception)\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 113,
+      "reference_id_hex": "71",
+      "title": "sbm078/Escape from the clearing ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [113] \r\nHEX: [71] \r\nsbm078/Escape from the clearing ×\r\nsbm078 contents/Escape from the clearing\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 114,
+      "reference_id_hex": "72",
+      "title": "sbm079/Escape from the clearing (scouts) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [114] \r\nHEX: [72] \r\nsbm079/Escape from the clearing (scouts) ×\r\nsbm079 content/Escape from the clearing (scouts)\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 116,
+      "reference_id_hex": "74",
+      "title": "sbm081/Go to the goal with the prisoner (soldier, centipede possible) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [116] \r\nHEX: [74] \r\nsbm081/Go to the goal with the prisoner (soldier, centipede possible) ×\r\nsbm081 content/Go to the goal with the prisoner (soldier, centipede possible)\r\n\r\nIncorporated status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 117,
+      "reference_id_hex": "75",
+      "title": "[EXTRA OPS: Lost 045] Escape support",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [117] \r\nHEX: [75] \r\n[EXTRA OPS: Lost 045] Escape support\r\nSupport (cover) the escape of the <C=FF4040> prisoners held by the enemy.\r\nIf the <C=FF4040> prisoners die or are left unconscious, the mission will fail.\r\n---------------------------------------\r\nCosta Rica - Mine camouflage base / Mine residential area"
+    },
+    {
+      "reference_id_decimal": 119,
+      "reference_id_hex": "77",
+      "title": "[EXTRA OPS: Lost 046] Escape support",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [119] \r\nHEX: [77] \r\n[EXTRA OPS: Lost 046] Escape support\r\nSupport (cover) the escape of the <C=FF4040> undercover agent (Mole) who was held prisoner inside the mine camouflage base.\r\nIf the <C=FF4040> agent dies or is left unconscious, the mission will fail.\r\n---------------------------------------\r\nCosta Rica, mining base / AI weapon storage"
+    },
+    {
+      "reference_id_decimal": 120,
+      "reference_id_hex": "78",
+      "title": "sbm085/Heading to goal ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [120] \r\nHEX: [78] \r\nsbm085/Heading to goal ×\r\nsbm085 contents/Heading to goal\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nCosta Rica, Limon East / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 121,
+      "reference_id_hex": "79",
+      "title": "[EXTRA OPS: Deleted] Equipment capture",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [121] \r\nHEX: [79] \r\n[EXTRA OPS: Deleted] Equipment capture\r\nEliminate the enemy mercenaries at the fort (Fuerte la Ladera) on the side of Mt. Irazu,\r\ncollect the equipment, and then head to the collection point (goal).\r\n\r\nTime limit: 03'00\"\r\n\r\nNumber of targets: 1\r\n---------------------------------------\r\nCosta Rica, Mt. Irazu / Fuerte la Ladera"
+    },
+    {
+      "reference_id_decimal": 122,
+      "reference_id_hex": "7A",
+      "title": "[EXTRA OPS: Deleted] Equipment Capture",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [122] \r\nHEX: [7a] \r\n[EXTRA OPS: Deleted] Equipment Capture\r\nEliminate the enemy mercenaries <C=FF4040> in the mining settlement area, obtain their equipment (target), and then <C=R> head to the recovery point (goal).\r\nTime limit: 03'00\"\r\nNumber of targets: 1\r\n---------------------------------------\r\nCosta Rica, mining base / mining residential area"
+    },
+    {
+      "reference_id_decimal": 123,
+      "reference_id_hex": "7B",
+      "title": "[EXTRA OPS: Deleted] Equipment capture",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [123] \r\nHEX: [7b] \r\n[EXTRA OPS: Deleted] Equipment capture\r\nEliminate the enemy mercenaries <C=FF4040> at the coastal material delivery facility (Puerto del Alba), obtain their equipment (target), and then head <C=R> to the recovery point (goal).\r\nThe mission will fail <C=R> if you are spotted by enemy mercenaries <C=FF4040>.\r\nTime limit: 03'00\"\r\nNumber of targets: 1\r\n---------------------------------------\r\nCosta Rica, Caribbean coast / Puerto del Alba"
+    },
+    {
+      "reference_id_decimal": 124,
+      "reference_id_hex": "7C",
+      "title": "sbm089/Carry items (rations) and head to the designated area ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [124] \r\nHEX: [7c] \r\nsbm089/Carry items (rations) and head to the designated area ×\r\nsbm059Contents/Eliminate the gun turrets\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 125,
+      "reference_id_hex": "7D",
+      "title": "[EXTRA OPS: Deleted] Escape Support",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [125] \r\nHEX: [7d] \r\n[EXTRA OPS: Deleted] Escape Support\r\nSupport (cover) the escape of the prisoners held inside the mining base.\r\nTime limit:\r\nWeapons required:\r\nEquipment required:\r\nNumber of targets: 1\r\n---------------------------------------\r\nUS missile base, Nicaragua / Service entrance"
+    },
+    {
+      "reference_id_decimal": 126,
+      "reference_id_hex": "7E",
+      "title": "sbm091/Carry items (claymore, placement weapons) and head to designated area",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [126] \r\nHEX: [7e] \r\nsbm091/Carry items (claymore, placement weapons) and head to designated area\r\nsbm091 content/Carry items (claymore, placement weapons) and head to designated area\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 127,
+      "reference_id_hex": "7F",
+      "title": "sbm092/Carry items (claymore, placement weapons) and head to designated area ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [127] \r\nHEX: [7f] \r\nsbm092/Carry items (claymore, placement weapons) and head to designated area ×\r\nsbm092 content/Carry items (claymore, placement weapons) and head to designated area\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 134,
+      "reference_id_hex": "86",
+      "title": "sbm099/Take a picture of a sleeping scout (photographed) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [134] \r\nHEX: [86] \r\nsbm099/Take a picture of a sleeping scout (photographed) ×\r\nsbm099 content/Take a picture of a sleeping scout (photographed)\r\n\r\nIntegration status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 135,
+      "reference_id_hex": "87",
+      "title": "sbm100/Take a picture of a sleeping scout (photographed) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [135] \r\nHEX: [87] \r\nsbm100/Take a picture of a sleeping scout (photographed) ×\r\nsbm100 content/Take a picture of a sleeping scout (photographed)\r\n\r\nIntegration status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 136,
+      "reference_id_hex": "88",
+      "title": "sbm101/Take a picture of all scouts (photographed) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [136] \r\nHEX: [88] \r\nsbm101/Take a picture of all scouts (photographed) ×\r\nsbm101 content/Take a picture of all scouts (photographed)\r\n\r\nIntegration status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 139,
+      "reference_id_hex": "8B",
+      "title": "Photographing the Third Commander",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [139] \r\nHEX: [8b] \r\nPhotographing the Third Commander\r\nTake a photo of a commander who looks bored.\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 142,
+      "reference_id_hex": "8E",
+      "title": "sbm107/Photography (take a peace sign) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [142] \r\nHEX: [8e] \r\nsbm107/Photography (take a peace sign) ×\r\nsbm107 content/Photography (take a peace sign)\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 143,
+      "reference_id_hex": "8F",
+      "title": "sbm108/Photography (take a peace sign) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [143] \r\nHEX: [8f]\r\nsbm108/Photography (take a peace sign) ×\r\nsbm108 content/Photography (take a peace sign)\r\n\r\nInstallation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 144,
+      "reference_id_hex": "90",
+      "title": "sbm109/Photography (take a peace sign) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [144] \r\nHEX: [90] \r\nsbm109/Photography (take a peace sign) ×\r\nsbm109 content/Photography (take a peace sign)\r\n\r\nInstallation status: ×\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 145,
+      "reference_id_hex": "91",
+      "title": "sbm110/Photography (take a peace sign) ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [145]\r\nHEX: [91]\r\n sbm110/Photography (take a peace sign) ×\r\nsbm110 content/Photography (take a peace sign)\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 146,
+      "reference_id_hex": "92",
+      "title": "Contents of sbm111/Fulton recovery of prisoners (FSLN soldiers, fixed position)",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [146]\r\nHEX: [92] \r\nContents of sbm111/Fulton recovery of prisoners (FSLN soldiers, fixed position)\r\nsbm111/Fulton recovery of prisoners (FSLN soldiers, fixed position)\r\n(Time limit)\r\n\r\nIncorporation status: ×\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 149,
+      "reference_id_hex": "95",
+      "title": "[EXTRA OPS: Deleted] Puyan Mission",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [149] \r\nHEX: [95] \r\n[EXTRA OPS: Deleted] Puyan Mission\r\n\"Puyan Mission: US Missile Base Rooftop\"\r\nShoot down the balloon for Fulton recovery and prevent the capture\r\n(abduct) of the soldiers.\r\n<C=FF4040>Mission fails if 3 people are abducted<C=R>.\r\n\r\nBonus points are also awarded for preventing the abduction of supplies.\r\n\r\nNumber of targets: 32\r\n---------------------------------------\r\nNicaragua, US military missile base / rooftop"
+    },
+    {
+      "reference_id_decimal": 151,
+      "reference_id_hex": "97",
+      "title": "sbm116/Eliminate all enemies with one bullet ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [151] \r\nHEX: [97] \r\nsbm116/Eliminate all enemies with one bullet ×\r\nsbm116 content/Eliminate all enemies with one bullet\r\n---------------------------------------\r\nCosta Rica, Limon East / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 152,
+      "reference_id_hex": "98",
+      "title": "[EXTRA OPS: Deleted] Base defense",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [152] \r\nHEX: [98] \r\n[EXTRA OPS: Deleted] Base defense\r\nIn the underground passage of the US military missile base in Nicaragua, <C=FF4040>Stop the enemy reinforcements<C=R>\r\n\r\n<C=R>. <C=FF4040>MSF soldiers only<C=R>.\r\nNumber of targets: 20 (number of enemy soldiers)\r\n---------------------------------------\r\nUS missile base in Nicaragua / Underground passage"
+    },
+    {
+      "reference_id_decimal": 154,
+      "reference_id_hex": "9A",
+      "title": "sbm119 / Defend the base (broken object) from enemy soldiers ×",
+      "marked_not_incorporated": true,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [154] \r\nHEX: [9a] \r\nsbm119 / Defend the base (broken object) from enemy soldiers ×\r\nsbm119 content / Defend the base (broken object) from enemy soldiers\r\n---------------------------------------\r\nEast Limon, Costa Rica / El Senagal / Jungle"
+    },
+    {
+      "reference_id_decimal": 199,
+      "reference_id_hex": "C7",
+      "title": "[EXTRA OPS: Deleted] Anti-Armored Vehicle Battle: LAV-type C",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [199] \r\nHEX: [c7] \r\n[EXTRA OPS: Deleted] Anti-Armored Vehicle Battle: LAV-type C\r\nOperation area: El Cadalso\r\n<C=FF4040> Neutralize the enemy armored vehicle<C=R>.\r\nThe mission is completed by destroying it or neutralizing the enemy unit.\r\n---------------------------------------\r\nCosta Rica, Mount Irazu / El Cadalso"
+    },
+    {
+      "reference_id_decimal": 200,
+      "reference_id_hex": "C8",
+      "title": "[EXTRA OPS: No longer available] Anti-Armored Vehicle Battle: LAV-typeC Custom",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [200] \r\nHEX: [c8] \r\n[EXTRA OPS: No longer available] Anti-Armored Vehicle Battle: LAV-typeC Custom\r\nOperation area: El Cadalso\r\n<C=FF4040> Neutralize the enemy armored vehicle <C=R>.\r\nThe mission is completed by destroying it or neutralizing the enemy forces.\r\n---------------------------------------\r\nCosta Rica, Mount Irazu / El Cadalso"
+    },
+    {
+      "reference_id_decimal": 211,
+      "reference_id_hex": "D3",
+      "title": "sbm249/Basilsco: 2 legs -2",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [211] \r\nHEX: [d3] \r\nsbm249/Basilsco: 2 legs -2\r\nsbm249 contents/Basilsco: 2 legs -2\r\n---------------------------------------\r\nCosta Rica, Mine camouflage base / Bottom of the mine"
+    },
+    {
+      "reference_id_decimal": 213,
+      "reference_id_hex": "D5",
+      "title": "Battle against Metal Gear ZEKE",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [213] \r\nHEX: [d5] \r\nBattle against Metal Gear ZEKE\r\nNeutralize the AI-equipped Metal Gear ZEKE.\r\nThe mission is completed by destroying it or immobilizing the AI-equipped vehicle.\r\n---------------------------------------\r\nMSF Mother Base / Mother Base / Deck"
+    },
+    {
+      "reference_id_decimal": 214,
+      "reference_id_hex": "D6",
+      "title": "Battle against Metal Gear ZEKE",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [214] \r\nHEX: [d6] \r\nBattle against Metal Gear ZEKE\r\nNeutralize the AI-equipped Metal Gear ZEKE.\r\nThe mission is completed by destroying it or immobilizing its AI.\r\n\r\nTime limit:\r\n\r\nWeapons required:\r\n\r\nEquipment required:\r\n\r\nNumber of targets:\r\n---------------------------------------\r\nMSF Mother Base / Mother Base / Deck"
+    },
+    {
+      "reference_id_decimal": 215,
+      "reference_id_hex": "D7",
+      "title": "Battle against Metal Gear ZEKE",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [215] \r\nHEX: [d7]\r\nBattle against Metal Gear ZEKE\r\nNeutralize the AI-equipped Metal Gear ZEKE.\r\nThe mission is completed by destroying it or immobilizing its AI.\r\n\r\nTime limit:\r\n\r\nWeapons required:\r\n\r\nEquipment required:\r\n\r\nNumber of targets:\r\n---------------------------------------\r\nMSF Mother Base / Mother Base / Deck"
+    },
+    {
+      "reference_id_decimal": 216,
+      "reference_id_hex": "D8",
+      "title": "Battle against Metal Gear ZEKE",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [216] \r\nHEX: [d8] \r\nBattle against Metal Gear ZEKE\r\nNeutralize the AI-equipped Metal Gear ZEKE.\r\nThe mission is completed by destroying it or immobilizing its AI.\r\n\r\nTime limit:\r\n\r\nWeapons required:\r\n\r\nEquipment required:\r\n\r\nNumber of targets:\r\n---------------------------------------\r\nMSF Mother Base / Mother Base / Deck"
+    },
+    {
+      "reference_id_decimal": 220,
+      "reference_id_hex": "DC",
+      "title": "sbm258/Basilsco: 2 legs -3",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [220] \r\nHEX: [dc] \r\nsbm258/Basilsco: 2 legs -3\r\nsbm258 contents/Basilsco: 2 legs -3\r\n---------------------------------------\r\nCosta Rica - Disguised mining base / Bottom of the mining site"
+    },
+    {
+      "reference_id_decimal": 223,
+      "reference_id_hex": "DF",
+      "title": "[EXTRA OPS: Deleted] Metal Gear ZEKE - Cross BattleS",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [223] \r\nHEX: [df] \r\n[EXTRA OPS: Deleted] Metal Gear ZEKE - Cross BattleS\r\nRemotely control Metal Gear ZEKE and annihilate the Mother Base intruders.\r\n--------------------------------------\r\nMSF Mother Base / Mother Base / Deck"
+    },
+    {
+      "reference_id_decimal": 233,
+      "reference_id_hex": "E9",
+      "title": "[EXTRA OPS: PSP EXCLUSIVE] [AP] MSF Entrance Exam",
+      "marked_not_incorporated": false,
+      "pc_save_mapping": null,
+      "reference_text": "DEC: [233] \r\nHEX: [e9] \r\n[EXTRA OPS: PSP EXCLUSIVE] [AP] MSF Entrance Exam\r\nForce all prospective MSF members into submission using\r\nonly CQC and melee attacks.\r\nForcing all recruits into submission before time runs out \r\nwill result in all of them joining MSF.\r\n--------------------------------------\r\nBarranquilla Coast / Colombia / MSF Base"
+    }
+  ],
+  "warning": "Reference IDs are not verified PC availability/completion bit indices. Presence of an entry does not establish a launchable stage. Do not apply ID-to-bit arithmetic without selector evidence."
+}

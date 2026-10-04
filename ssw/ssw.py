@@ -206,7 +206,26 @@ MISSION_FLAGS = (
     MissionFlag("M0230 / Pursue Peace Walker", (0x1C46A,), 0x80, "Internal Main Ops entry"),
     MissionFlag("[017] FULTON RECOVERY", (0x1C46F,), 0x04, "Internal duplicate"),
     MissionFlag("[058] DEFEND KEY SUPPLIES", (0x1C470,), 0x20, "Internal duplicate"),
+    MissionFlag("[120] METAL GEAR ZEKE — CROSS BATTLE", (0x1C483,), 0x80, "Menu entry confirmed; requires Cross Battle ASI"),
 )
+
+MISSION_REFERENCE = {}
+_mission_catalog = ROOT / "mission_catalogs" / "internal_missions.json"
+if _mission_catalog.is_file():
+    _reference_entries = json.loads(_mission_catalog.read_text(encoding="utf-8"))["entries"]
+    _known_bits = {(m.offsets[0], m.mask) for m in MISSION_FLAGS}
+    _extra_flags = []
+    for _entry in _reference_entries:
+        _id = _entry["reference_id_decimal"]
+        _bit = (0x1C468 + _id // 8, 1 << (_id % 8))
+        MISSION_REFERENCE[_bit] = _entry
+        if _bit not in _known_bits:
+            _extra_flags.append(MissionFlag(
+                f"{_id:03d} / {_entry['title']}", (_bit[0],), _bit[1],
+                "Reference marks not incorporated" if _entry["marked_not_incorporated"] else "Experimental reference-ID mapping",
+            ))
+            _known_bits.add(_bit)
+    MISSION_FLAGS += tuple(_extra_flags)
 
 
 class SaveSession:
@@ -263,8 +282,37 @@ class InternalMissionTab(ttk.Frame):
             text="Internal Missions are experimental. Always keep an untouched backup.",
             foreground="#c93b31",
         ).pack(anchor="w", pady=(0, 12))
-        self.panel = ttk.LabelFrame(self, text="Internal Missions", padding=12)
-        self.panel.pack(fill="x")
+        self.columnconfigure(0, weight=1, uniform="mission_panes")
+        self.columnconfigure(2, weight=1, uniform="mission_panes")
+        self.rowconfigure(2, weight=1)
+        # Convert the title area to grid before creating the split panes.
+        title_widgets = self.winfo_children()
+        for widget in title_widgets:
+            widget.pack_forget()
+        for row, widget in enumerate(title_widgets):
+            widget.grid(row=row, column=0, columnspan=3, sticky="w", pady=(0, 12))
+        left = ttk.Frame(self)
+        left.grid(row=2, column=0, sticky="nsew", padx=(0, 12))
+        tk.Frame(self, bg="#111111", width=3).grid(row=2, column=1, sticky="ns")
+        right = ttk.Frame(self, padding=(16, 0))
+        right.grid(row=2, column=2, sticky="nsew")
+        ttk.Label(right, text="MISSION DETAILS", style="Heading.TLabel").pack(anchor="w")
+        self.details = tk.Text(right, wrap="word", height=15, relief="flat", bg="#d6d5bd")
+        self.details.pack(fill="both", expand=True, pady=12)
+        self.show_mission_details(0)
+        canvas = tk.Canvas(left, highlightthickness=0, bg="#d6d5bd")
+        scrollbar = ttk.Scrollbar(left, orient="vertical", command=canvas.yview)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(fill="both", expand=True)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        self.panel = ttk.Frame(canvas, padding=8)
+        window = canvas.create_window((0, 0), window=self.panel, anchor="nw")
+        self.panel.bind("<Configure>", lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
+        canvas.bind("<Configure>", lambda e: canvas.itemconfigure(window, width=e.width))
+        def scroll(event):
+            canvas.yview_scroll(-int(event.delta / 120), "units")
+        canvas.bind("<MouseWheel>", scroll)
+        self.panel.bind("<MouseWheel>", scroll)
         for index, mission in enumerate(MISSION_FLAGS):
             line = ttk.Frame(self.panel)
             line.pack(fill="x", pady=4)
@@ -274,8 +322,10 @@ class InternalMissionTab(ttk.Frame):
                 variable=self.vars[index],
                 command=lambda i=index: self.changed(i),
             )
-            check.pack(side="left")
-            ttk.Label(line, text=mission.note, foreground="#777").pack(side="right")
+            check.pack(anchor="w")
+            check.bind("<FocusIn>", lambda _e, i=index: self.show_mission_details(i))
+            check.bind("<MouseWheel>", scroll)
+            ttk.Label(line, text=mission.note, foreground="#777").pack(anchor="w", padx=22)
         sbm_line = ttk.Frame(self.panel)
         sbm_line.pack(fill="x", pady=4)
         ttk.Checkbutton(
@@ -284,13 +334,24 @@ class InternalMissionTab(ttk.Frame):
             variable=self.sbm_var,
             command=self.sbm_changed,
         ).pack(side="left")
-        ttk.Label(sbm_line, text=SBM_PROFILE.note, foreground="#a04b35").pack(side="right")
-        ttk.Label(
-            self,
-            text="The unfinished five-skull [008] entry is intentionally excluded because its complete flag condition is not safely mapped.",
-            wraplength=950,
-        ).pack(anchor="w", pady=12)
+        ttk.Label(sbm_line, text=SBM_PROFILE.note, foreground="#a04b35").pack(anchor="w", padx=22)
         self.session.subscribe(self.refresh)
+
+    def show_mission_details(self, index: int) -> None:
+        mission = MISSION_FLAGS[index]
+        reference = MISSION_REFERENCE.get((mission.offsets[0], mission.mask))
+        text = f"{mission.name}\n\n{mission.note}\n\n"
+        if reference:
+            text += reference["reference_text"] + "\n\n"
+        if mission.note.startswith("Experimental") or mission.note.startswith("Reference marks"):
+            text += "This switch uses the inferred reference-ID availability bitmap. Its mapping is not independently verified. Enabling visibility does not establish that the mission loads or works.\n\n"
+        if "CROSS BATTLE" in mission.name:
+            text += "Install PeaceWalkerCrossBattleInputTest_v1.asi for the accepted initialization/input fix.\n\n"
+        text += f"Save offset: {mission.offsets[0]:#x} / mask: {mission.mask:#x}"
+        self.details.configure(state="normal")
+        self.details.delete("1.0", "end")
+        self.details.insert("end", text)
+        self.details.configure(state="disabled")
 
     def flag_value(self, mission: MissionFlag) -> bool:
         assert self.session.data is not None
@@ -308,6 +369,7 @@ class InternalMissionTab(ttk.Frame):
         self.sbm_var.set(all(self.session.data[offset] == value for offset, value in SBM_PROFILE.writes))
 
     def changed(self, index: int) -> None:
+        self.show_mission_details(index)
         if self.session.data is None:
             messagebox.showinfo("No save open", "Open a save first.")
             self.vars[index].set(False)

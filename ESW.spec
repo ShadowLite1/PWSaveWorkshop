@@ -2,7 +2,7 @@ from pathlib import Path
 
 root = Path(SPECPATH)
 datas = [(str(root / 'ssw' / 'assets' / 'app_icon.ico'), '.')]
-for folder in ('portrait_assets', 'staff_tag_assets', 'quote_assets', 'font_assets', 'voice_previews', 'loadout_catalogs'):
+for folder in ('portrait_assets', 'staff_tag_assets', 'quote_assets', 'font_assets', 'voice_previews', 'loadout_catalogs', 'mission_catalogs'):
     path = root / folder
     if path.exists():
         datas.append((str(path), folder))
