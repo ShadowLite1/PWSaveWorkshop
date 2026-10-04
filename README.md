@@ -23,7 +23,7 @@ The build creates `dist/EspiritSaveWorkshop/EspiritSaveWorkshop.exe` alongside a
 
 Keep an untouched backup of your save. Experimental IDs and mission switches are not guaranteed playable. This editor does not install the seven-slot runtime patch automatically.
 
-Resources are stored in `portrait_assets`, `staff_tag_assets`, `quote_assets`, `font_assets`, and `voice_previews`, matching the Soldier Editor source layout. Native plugin source is in `quote_plugin` and `plugins`, with MinHook in `third_party/minhook`.
+Resources are stored in `portrait_assets`, `staff_tag_assets`, `quote_assets`, `font_assets`, and `voice_previews`, matching the Soldier Editor source layout. Native plugin source is in `plugins`, with MinHook in `third_party/minhook`. Custom Quotes is supplied as the built `asi/PeaceWalkerCustomQuotes.asi` file.
 
 The `asi` folder contains complete plugin files: Custom Quotes (user-confirmed working), Seven Slots v3 (seven items/weapons tested in gameplay), Eight Skills (stable release), and Cross Battle Input v1 (accepted after successful initialization and controls testing). The Cross Battle filename retains its original Test name; the shipped file is the accepted auto-activating build. Prototype, observer, capture, and unfinished box/Versus effect plugins are excluded.
 
@@ -31,4 +31,4 @@ The build copies `asi` beside the executable, separately from `_internal`. To in
 
 The package also includes `PeaceWalkerStrikeTableTest_v1.asi` (strike arrival confirmed in testing) and `PeaceWalkerVersusEquipment_v4.asi` (Versus equipment access). Equipment access does not restore every Co-op effect; ASSN/Rescue Box behavior remains unfinished.
 
-To rebuild the native plugins, install Visual Studio C++ Build Tools and run `build_plugins.bat`. This replaces the six files in `asi` with newly compiled versions. The checked-in ASIs are the existing working builds.
+To rebuild the five plugins with source included, install Visual Studio C++ Build Tools and run `build_plugins.bat`. Custom Quotes remains the supplied built ASI. The checked-in ASIs are the existing working builds.

@@ -13,8 +13,6 @@ pushd "%TASKROOT%build\plugins"
 set "TASKMH=%TASKROOT%third_party\minhook"
 cl /nologo /O2 /MT /c /I"%TASKMH%\include" "%TASKMH%\src\buffer.c" "%TASKMH%\src\hook.c" "%TASKMH%\src\trampoline.c" "%TASKMH%\src\hde\hde64.c"
 if errorlevel 1 goto failed
-cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%quote_plugin\PeaceWalkerCustomQuotes.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerCustomQuotes.asi" /DLL
-if errorlevel 1 goto failed
 cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerSevenSlots.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerSevenSlots_v3.asi" /DLL
 if errorlevel 1 goto failed
 cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerEightSkills.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerEightSkills.asi" /DLL
