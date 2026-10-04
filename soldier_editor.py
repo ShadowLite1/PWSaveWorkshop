@@ -2402,7 +2402,8 @@ class SoldierEditor(ttk.Frame):
         return sidecar
 
     def install_custom_quote_support(self) -> None:
-        plugin = self.resource_root / "quote_plugin" / "PeaceWalkerCustomQuotes.asi"
+        plugin_root = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else self.resource_root
+        plugin = plugin_root / "asi" / "PeaceWalkerCustomQuotes.asi"
         if not plugin.is_file():
             messagebox.showerror(
                 "Custom Quote Support",

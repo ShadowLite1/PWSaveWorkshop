@@ -23,4 +23,10 @@ The build creates `dist/EspiritSaveWorkshop/EspiritSaveWorkshop.exe` alongside a
 
 Keep an untouched backup of your save. Experimental IDs and mission switches are not guaranteed playable. This editor does not install the seven-slot runtime patch automatically.
 
-Optional local resource folders: `portrait_assets`, `staff_tag_assets`, `quote_assets`, `font_assets`, `voice_previews`, and `quote_plugin`. The build includes any present folders. Game-extracted artwork/audio and native game plugins are not included in this source repository; provide your own authorized copies locally for those features.
+Resources are stored in `portrait_assets`, `staff_tag_assets`, `quote_assets`, `font_assets`, and `voice_previews`, matching the Soldier Editor source layout. Native plugin source is in `quote_plugin` and `plugins`, with MinHook in `third_party/minhook`.
+
+The `asi` folder contains complete plugin files: Custom Quotes (user-confirmed working), Seven Slots v3 (seven items/weapons tested in gameplay), Eight Skills (stable release), and Cross Battle Input v1 (accepted after successful initialization and controls testing). The Cross Battle filename retains its original Test name; the shipped file is the accepted auto-activating build. Prototype, observer, capture, and unfinished box/Versus effect plugins are excluded.
+
+The build copies `asi` beside the executable, separately from `_internal`. To install a plugin, copy the desired ASI into the game's `mgspw/scripts` folder with a compatible ASI loader. Restart the game after changing plugins. ESW's quote installation button reads its plugin from `asi`.
+
+To rebuild the native plugins, install Visual Studio C++ Build Tools and run `build_plugins.bat`. This replaces the four files in `asi` with newly compiled versions. The checked-in ASIs are the existing working builds.

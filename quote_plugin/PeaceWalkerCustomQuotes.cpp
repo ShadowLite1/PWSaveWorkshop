@@ -1,0 +1,260 @@
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#include <MinHook.h>
+
+#include <atomic>
+#include <chrono>
+#include <cstring>
+#include <cstdint>
+#include <filesystem>
+#include <fstream>
+#include <mutex>
+#include <regex>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <utility>
+
+namespace fs = std::filesystem;
+
+namespace {
+constexpr uintptr_t kOldQuoteResolverRva = 0x356300;
+constexpr uintptr_t kUpdatedQuoteResolverRva = 0x356480;
+constexpr uintptr_t kOldStringCopyRva = 0x10BEC0;
+constexpr uintptr_t kUpdatedStringCopyRva = 0x10C040;
+constexpr wchar_t kGameExe[] = L"METAL GEAR SOLID PEACE WALKER.exe";
+constexpr wchar_t kSidecarSuffix[] = L".pwquotes.json";
+
+using QuoteResolver = void* (__fastcall*)(void*, void*, uint32_t, void*);
+using StringCopy = void* (__fastcall*)(void*, void*, const char*, uintptr_t);
+
+QuoteResolver g_original_resolver = nullptr;
+StringCopy g_original_copy = nullptr;
+std::unordered_map<std::string, std::string> g_quotes;
+std::mutex g_quotes_mutex;
+std::atomic_bool g_running{true};
+thread_local uint32_t g_active_quote = 0;
+thread_local bool g_has_active_quote = false;
+thread_local std::string g_active_soldier_name;
+std::string g_last_soldier_name;
+fs::path g_loaded_sidecar;
+fs::file_time_type g_loaded_write_time{};
+
+constexpr uint8_t kQuoteResolverSignature[] = {
+    0x48, 0x89, 0x5C, 0x24, 0x18, 0x55,
+    0x56, 0x41, 0x56, 0x48, 0x83, 0xEC,
+};
+constexpr uint8_t kStringCopySignature[] = {
+    0x44, 0x89, 0x4C, 0x24, 0x20, 0x53, 0x57, 0x41,
+    0x54, 0x48, 0x83, 0xEC, 0x30, 0x48, 0x89, 0x6C,
+};
+
+bool MatchesSignature(uintptr_t address, const uint8_t* signature, size_t size) noexcept {
+    __try {
+        return address != 0 && std::memcmp(reinterpret_cast<const void*>(address), signature, size) == 0;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        return false;
+    }
+}
+
+uintptr_t SelectSupportedRva(uintptr_t base, uintptr_t old_rva, uintptr_t updated_rva,
+                             const uint8_t* signature, size_t size) noexcept {
+    if (MatchesSignature(base + updated_rva, signature, size)) return updated_rva;
+    if (MatchesSignature(base + old_rva, signature, size)) return old_rva;
+    return 0;
+}
+
+void Log(const std::string& message) {
+    wchar_t module_path[MAX_PATH]{};
+    GetModuleFileNameW(nullptr, module_path, MAX_PATH);
+    fs::path log_path = fs::path(module_path).parent_path() / L"PeaceWalkerCustomQuotes.log";
+    std::ofstream output(log_path, std::ios::app);
+    if (output) output << message << '\n';
+}
+
+std::string DecodeJsonString(const std::string& value) {
+    std::string result;
+    result.reserve(value.size());
+    for (size_t i = 0; i < value.size(); ++i) {
+        if (value[i] != '\\' || i + 1 >= value.size()) {
+            result.push_back(value[i]);
+            continue;
+        }
+        const char escaped = value[++i];
+        switch (escaped) {
+        case '"': result.push_back('"'); break;
+        case '\\': result.push_back('\\'); break;
+        case '/': result.push_back('/'); break;
+        case 'b': result.push_back('\b'); break;
+        case 'f': result.push_back('\f'); break;
+        case 'n': result.push_back('\n'); break;
+        case 'r': result.push_back('\r'); break;
+        case 't': result.push_back('\t'); break;
+        default: result.push_back(escaped); break;
+        }
+    }
+    return result;
+}
+
+bool ParseSidecar(const fs::path& path, std::unordered_map<std::string, std::string>& quotes) {
+    std::ifstream input(path, std::ios::binary);
+    if (!input) return false;
+    std::ostringstream buffer;
+    buffer << input.rdbuf();
+    const std::string json = buffer.str();
+    const std::regex entry(
+        R"quote("name"\s*:\s*"((?:\\.|[^"\\])*)"\s*,\s*"selector"\s*:\s*"[^"]*"\s*,\s*"runtime_index"\s*:\s*\d+\s*,\s*"text"\s*:\s*"((?:\\.|[^"\\])*)")quote",
+        std::regex::ECMAScript);
+    for (std::sregex_iterator it(json.begin(), json.end(), entry), end; it != end; ++it) {
+        const std::string name = DecodeJsonString((*it)[1].str());
+        quotes[name] = DecodeJsonString((*it)[2].str());
+    }
+    return !quotes.empty();
+}
+
+fs::path FindNewestSidecar() {
+    wchar_t module_path[MAX_PATH]{};
+    GetModuleFileNameW(nullptr, module_path, MAX_PATH);
+    const fs::path game_dir = fs::path(module_path).parent_path();
+    const fs::path root = game_dir.parent_path() / L"mgspw_savedata_win";
+    if (!fs::exists(root)) return {};
+
+    fs::path newest;
+    fs::file_time_type newest_time{};
+    std::error_code error;
+    for (fs::recursive_directory_iterator it(root, fs::directory_options::skip_permission_denied, error), end;
+         it != end; it.increment(error)) {
+        if (error || !it->is_regular_file(error)) continue;
+        const std::wstring filename = it->path().filename().wstring();
+        if (!filename.ends_with(kSidecarSuffix)) continue;
+        fs::path save_path = it->path().parent_path() /
+            filename.substr(0, filename.size() - std::wstring(kSidecarSuffix).size());
+        if (!fs::exists(save_path, error)) continue;
+        const auto write_time = fs::last_write_time(save_path, error);
+        if (!error && (newest.empty() || write_time > newest_time)) {
+            newest = it->path();
+            newest_time = write_time;
+        }
+    }
+    return newest;
+}
+
+void RefreshQuotes() {
+    const fs::path sidecar = FindNewestSidecar();
+    if (sidecar.empty()) return;
+    std::error_code error;
+    const auto write_time = fs::last_write_time(sidecar, error);
+    if (error || (sidecar == g_loaded_sidecar && write_time == g_loaded_write_time)) return;
+
+    std::unordered_map<std::string, std::string> parsed;
+    if (!ParseSidecar(sidecar, parsed)) {
+        Log("Could not parse custom quote file: " + sidecar.string());
+        return;
+    }
+    {
+        std::lock_guard lock(g_quotes_mutex);
+        g_quotes = std::move(parsed);
+    }
+    g_loaded_sidecar = sidecar;
+    g_loaded_write_time = write_time;
+    Log("Loaded custom quotes from: " + sidecar.string());
+}
+
+void* __fastcall HookQuoteResolver(void* first, void* second, uint32_t index, void* fourth) {
+    const uint32_t previous_index = g_active_quote;
+    const bool previous_active = g_has_active_quote;
+    std::string previous_name = std::move(g_active_soldier_name);
+    g_active_quote = index;
+    g_has_active_quote = true;
+    g_active_soldier_name.clear();
+    void* result = g_original_resolver(first, second, index, fourth);
+    g_active_quote = previous_index;
+    g_has_active_quote = previous_active;
+    g_active_soldier_name = std::move(previous_name);
+    return result;
+}
+
+uint16_t SafeReadWord(const void* address) noexcept {
+    __try {
+        return address ? *static_cast<const uint16_t*>(address) : 0;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        return 0;
+    }
+}
+
+void* __fastcall HookStringCopy(void* first, void* destination, const char* text, uintptr_t fourth) {
+    const uint16_t destination_marker = SafeReadWord(destination);
+    if (text != nullptr && fourth == 80 && destination_marker == 29) {
+        g_active_soldier_name = text;
+        std::lock_guard lock(g_quotes_mutex);
+        g_last_soldier_name = text;
+    } else if (text != nullptr && fourth == 80 && destination_marker == 255) {
+        thread_local std::string replacement;
+        std::lock_guard lock(g_quotes_mutex);
+        const std::string& soldier_name = g_active_soldier_name.empty()
+            ? g_last_soldier_name
+            : g_active_soldier_name;
+        const auto found = g_quotes.find(soldier_name);
+        if (found != g_quotes.end()) {
+            replacement = found->second;
+            text = replacement.c_str();
+            Log("Applied custom quote for soldier " + soldier_name);
+        }
+    }
+    return g_original_copy(first, destination, text, fourth);
+}
+
+DWORD WINAPI PluginMain(void*) {
+    HMODULE game = nullptr;
+    while (g_running && (game = GetModuleHandleW(kGameExe)) == nullptr) Sleep(250);
+    if (!game) return 0;
+
+    RefreshQuotes();
+    if (MH_Initialize() != MH_OK) {
+        Log("MinHook initialization failed.");
+        return 0;
+    }
+    const auto base = reinterpret_cast<uintptr_t>(game);
+    const auto quote_rva = SelectSupportedRva(
+        base, kOldQuoteResolverRva, kUpdatedQuoteResolverRva,
+        kQuoteResolverSignature, sizeof(kQuoteResolverSignature));
+    const auto copy_rva = SelectSupportedRva(
+        base, kOldStringCopyRva, kUpdatedStringCopyRva,
+        kStringCopySignature, sizeof(kStringCopySignature));
+    if (quote_rva == 0 || copy_rva == 0) {
+        Log("Unsupported game executable; no hooks were installed.");
+        MH_Uninitialize();
+        return 0;
+    }
+    if (MH_CreateHook(reinterpret_cast<void*>(base + quote_rva), &HookQuoteResolver,
+                      reinterpret_cast<void**>(&g_original_resolver)) != MH_OK ||
+        MH_CreateHook(reinterpret_cast<void*>(base + copy_rva), &HookStringCopy,
+                      reinterpret_cast<void**>(&g_original_copy)) != MH_OK ||
+        MH_EnableHook(MH_ALL_HOOKS) != MH_OK) {
+        Log("Could not install custom quote hooks. The game version may be unsupported.");
+        MH_DisableHook(MH_ALL_HOOKS);
+        MH_Uninitialize();
+        return 0;
+    }
+    std::ostringstream active;
+    active << "Custom quote support active. resolver RVA=0x" << std::hex << quote_rva
+           << " copy RVA=0x" << copy_rva;
+    Log(active.str());
+    while (g_running) {
+        Sleep(2000);
+        RefreshQuotes();
+    }
+    return 0;
+}
+}  // namespace
+
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID) {
+    if (reason == DLL_PROCESS_ATTACH) {
+        DisableThreadLibraryCalls(module);
+        if (HANDLE thread = CreateThread(nullptr, 0, PluginMain, nullptr, 0, nullptr)) CloseHandle(thread);
+    } else if (reason == DLL_PROCESS_DETACH) {
+        g_running = false;
+    }
+    return TRUE;
+}

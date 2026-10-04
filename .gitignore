@@ -9,9 +9,6 @@ dist/
 STW*
 *.pwsoldier
 *.pwquotes.json
-portrait_assets/
-staff_tag_assets/
-quote_assets/
-font_assets/
-voice_previews/
-quote_plugin/
+*.obj
+*.exp
+*.lib
