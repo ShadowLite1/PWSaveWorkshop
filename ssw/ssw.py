@@ -305,9 +305,13 @@ class InternalMissionTab(ttk.Frame):
             panel = ttk.Frame(pane)
             panel.pack(fill="x", anchor="n")
             panels.append(panel)
-        split = (len(MISSION_FLAGS) + 1) // 2
-        for index, mission in enumerate(MISSION_FLAGS):
-            column = 0 if index < split else 1
+        listed_missions = [
+            (index, mission) for index, mission in enumerate(MISSION_FLAGS)
+            if not (mission.offsets == (0x1C483,) and mission.mask == 0x80)
+        ]
+        split = (len(listed_missions) + 1) // 2
+        for position, (index, mission) in enumerate(listed_missions):
+            column = 0 if position < split else 1
             line = ttk.Frame(panels[column])
             line.pack(fill="x", pady=0)
             check = ttk.Checkbutton(
