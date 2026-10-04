@@ -2117,7 +2117,7 @@ class SoldierEditor(ttk.Frame):
             service_type = (
                 enum_value(self.service_type_var.get(), "Acquisition method")
                 if self.service_type_var.get().strip()
-                else self.data[start + SERVICE_TYPE_OFFSET]
+                else self.data[self.record_start(self.selected_slot) + SERVICE_TYPE_OFFSET]
             )
             sex = enum_value(self.sex_var.get(), "Sex")
             fixed_quote_id = FIXED_CLASS_QUOTE_IDS.get(soldier_type)
