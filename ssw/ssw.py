@@ -613,7 +613,6 @@ class LoadoutTab(ttk.Frame):
         )
         self.uniform_box.pack(side="left", padx=10)
         role_line = ttk.Frame(self)
-        role_line.pack(fill="x", pady=(0, 8))
         ttk.Label(role_line, text="Recruited-soldier role costume").pack(side="left")
         self.versus_role_box = ttk.Combobox(
             role_line,
@@ -627,9 +626,6 @@ class LoadoutTab(ttk.Frame):
         self.versus_role_box.pack(side="left", padx=10)
         self.mapping_status = tk.StringVar()
         actions = ttk.Frame(self)
-        actions.pack(anchor="w")
-        ttk.Button(actions, text="APPLY PRESET", command=self.apply).pack(side="left")
-        ttk.Button(actions, text="EXPORT ID SNAPSHOT", command=self.export_snapshot).pack(side="left", padx=8)
         self.session.subscribe(self.refresh)
 
     def record_indexes(self) -> tuple[int, ...]:
@@ -812,7 +808,7 @@ class LoadoutTab(ttk.Frame):
                 "Experimental neighboring Mission Prep record. It is edited independently."
             )
 
-    def apply(self) -> None:
+    def apply(self, quiet=False):
         if self.session.data is None:
             messagebox.showinfo("No save open", "Open a save first.")
             return
@@ -865,6 +861,8 @@ class LoadoutTab(ttk.Frame):
         except ValueError as exc:
             messagebox.showerror("Invalid equipment ID", str(exc))
             return
+        if quiet:
+            return True
         self.refresh()
         messagebox.showinfo(
             "Preset applied",
@@ -1062,9 +1060,26 @@ class ESW(tk.Tk):
         ttk.Separator(self.loadout_tab, orient="horizontal").pack(fill="x", padx=8, pady=6)
         self.versus_loadout = LoadoutTab(self.loadout_tab, self.session, "Versus Ops")
         self.versus_loadout.pack(fill="x")
+        ttk.Button(self.loadout_tab, text="APPLY PRESETS", command=self.apply_loadout_presets).pack(anchor="w", padx=8, pady=8)
         tabs.add(self.loadout_tab, text="Loadout Editor")
         tabs.add(ASIInstallerTab(tabs), text="ASI Installer")
         ttk.Label(self, textvariable=self.status, anchor="w", padding=6).pack(fill="x")
+
+    def apply_loadout_presets(self):
+        if self.session.data is None:
+            messagebox.showinfo("No save open", "Open a save first.")
+            return
+        original = bytes(self.session.data)
+        try:
+            if not self.coop_loadout.apply(quiet=True) or not self.versus_loadout.apply(quiet=True):
+                self.session.data[:] = original
+                return
+        except Exception:
+            self.session.data[:] = original
+            raise
+        self.coop_loadout.refresh()
+        self.versus_loadout.refresh()
+        messagebox.showinfo("Presets applied", "Both Co-op and Versus Ops presets were applied in memory. Use Save As to write them.")
 
     def build_menu(self) -> None:
         menu = tk.Menu(self)
