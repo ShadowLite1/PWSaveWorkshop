@@ -5,6 +5,10 @@ import struct
 import sys
 import json
 import re
+import threading
+import queue
+import urllib.request
+import webbrowser
 import tkinter as tk
 from dataclasses import dataclass
 from pathlib import Path
@@ -279,7 +283,7 @@ class InternalMissionTab(ttk.Frame):
         self.sbm_var = tk.BooleanVar()
         self.sbm_original: dict[int, int] | None = None
         self.unlocked = False
-        ttk.Label(self, text="SAVE EDITOR", style="Heading.TLabel").pack(anchor="w")
+        ttk.Label(self, text="FLAG EDITOR", style="Heading.TLabel").pack(anchor="w")
         ttk.Label(
             self,
             text="Internal Missions are experimental. Always keep an untouched backup.",
@@ -885,6 +889,101 @@ class LoadoutTab(ttk.Frame):
         messagebox.showinfo("Snapshot exported", "The current raw storage IDs were exported for mapping.")
 
 
+class ASIInstallerTab(ttk.Frame):
+    REPOSITORY = "https://github.com/ShadowLite1/PWSaveWorkshop/tree/main/asi"
+    DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ShadowLite1/PWSaveWorkshop/main/asi/"
+    PLUGINS = (
+        "PeaceWalkerCrossBattleInputTest.asi",
+        "PeaceWalkerCustomQuotes.asi",
+        "PeaceWalkerEightSkills.asi",
+        "PeaceWalkerSevenSlots.asi",
+        "PeaceWalkerStrikeTableTest.asi",
+        "PeaceWalkerVersusEquipment.asi",
+    )
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=18)
+        ttk.Label(self, text="ASI INSTALLER", style="Heading.TLabel").pack(anchor="w")
+        ttk.Label(self, text="Download selected ASIs from our GitHub repository into the game's scripts folder.").pack(anchor="w", pady=10)
+        ttk.Label(self, text="An ASI loader must already be installed. Restart the game after installing plugins.").pack(anchor="w")
+        ttk.Button(self, text="View ASIs on GitHub", command=lambda: webbrowser.open(self.REPOSITORY)).pack(anchor="w", pady=12)
+        self.selections = {}
+        for name in self.PLUGINS:
+            variable = tk.BooleanVar()
+            self.selections[name] = variable
+            ttk.Checkbutton(self, text=name, variable=variable).pack(anchor="w", pady=4)
+        self.install_button = ttk.Button(self, text="Download and Install Selected ASIs", command=self.install)
+        self.install_button.pack(anchor="w", pady=16)
+        self.status = tk.StringVar(value="Select the plugins you want to install.")
+        ttk.Label(self, textvariable=self.status).pack(anchor="w")
+        self.results = queue.Queue()
+
+    def install(self):
+        names = [name for name, variable in self.selections.items() if variable.get()]
+        if not names:
+            messagebox.showinfo("ASI Installer", "Select at least one ASI.")
+            return
+        chosen = filedialog.askopenfilename(title="Select METAL GEAR SOLID PEACE WALKER.exe", filetypes=[("Game executable", "*.exe")])
+        if not chosen:
+            return
+        executable = Path(chosen)
+        if executable.name.lower() != "metal gear solid peace walker.exe" or not executable.is_file():
+            messagebox.showerror("ASI Installer", "Select METAL GEAR SOLID PEACE WALKER.exe in your game folder.")
+            return
+        self.install_button.configure(state="disabled")
+        self.status.set("Downloading selected ASIs from GitHub…")
+        threading.Thread(target=self.download, args=(names, executable.parent / "scripts"), daemon=True).start()
+        self.after(100, self.poll_download)
+
+    def download(self, names, destination):
+        installed = []
+        try:
+            # Download and validate everything before changing the game folder.
+            downloads = {}
+            for name in names:
+                request = urllib.request.Request(self.DOWNLOAD_ROOT + name, headers={"User-Agent": "EspiritSaveWorkshop"})
+                with urllib.request.urlopen(request, timeout=30) as response:
+                    data = response.read(32 * 1024 * 1024 + 1)
+                if not data.startswith(b"MZ") or len(data) > 32 * 1024 * 1024:
+                    raise ValueError(f"Invalid ASI download: {name}")
+                downloads[name] = data
+            destination.mkdir(exist_ok=True)
+            for name, data in downloads.items():
+                target = destination / name
+                # Preserve both current and legacy versioned copies, moving legacy
+                # names out of loader discovery to avoid loading the same ASI twice.
+                previous = list(destination.glob(target.stem + "_v[0-9]*.asi"))
+                if target.exists():
+                    previous.append(target)
+                for old in previous:
+                    backup = old.with_name(old.name + ".backup")
+                    number = 1
+                    while backup.exists():
+                        backup = old.with_name(old.name + f".backup.{number}")
+                        number += 1
+                    old.rename(backup)
+                temporary = target.with_suffix(".asi.download")
+                temporary.write_bytes(data)
+                temporary.replace(target)
+                installed.append(name)
+            self.results.put((True, f"Installed {len(installed)} ASIs in {destination}. Restart the game to load them."))
+        except Exception as exc:
+            self.results.put((False, f"Installed {len(installed)} ASIs. Download/install failed: {exc}"))
+
+    def poll_download(self):
+        try:
+            success, text = self.results.get_nowait()
+        except queue.Empty:
+            self.after(100, self.poll_download)
+            return
+        self.install_button.configure(state="normal")
+        self.status.set(text)
+        if success:
+            messagebox.showinfo("ASI Installer", text)
+        else:
+            messagebox.showerror("ASI Installer", text)
+
+
 class ESW(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
@@ -904,9 +1003,10 @@ class ESW(tk.Tk):
         tabs.pack(fill="both", expand=True)
         self.soldier_editor = SoldierEditor(tabs, embedded=True, open_callback=self.open_save)
         tabs.add(self.soldier_editor, text="Soldier Editor")
-        tabs.add(InternalMissionTab(tabs, self.session), text="Save Editor")
+        tabs.add(InternalMissionTab(tabs, self.session), text="Flag Editor")
         self.loadout_tab = LoadoutTab(tabs, self.session)
         tabs.add(self.loadout_tab, text="Loadout Editor")
+        tabs.add(ASIInstallerTab(tabs), text="ASI Installer")
         ttk.Label(self, textvariable=self.status, anchor="w", padding=6).pack(fill="x")
 
     def build_menu(self) -> None:
