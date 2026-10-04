@@ -329,8 +329,8 @@ class SaveSession:
 
 
 class InternalMissionTab(ttk.Frame):
-    def __init__(self, master, session: SaveSession, group="Coop") -> None:
-        super().__init__(master, padding=8)
+    def __init__(self, master, session: SaveSession) -> None:
+        super().__init__(master, padding=16)
         self.session = session
         self.vars = [tk.BooleanVar() for _ in MISSION_FLAGS]
         self.sbm_var = tk.BooleanVar()
@@ -548,8 +548,8 @@ class ViewerTab(ttk.Frame):
 
 
 class LoadoutTab(ttk.Frame):
-    def __init__(self, master, session: SaveSession) -> None:
-        super().__init__(master, padding=16)
+    def __init__(self, master, session: SaveSession, group="Coop") -> None:
+        super().__init__(master, padding=8)
         self.session = session
         self.mode = tk.StringVar(value="Snake - Coop" if group == "Coop" else "Versus Ops — original preset")
         self.soldier_choice = tk.StringVar()
