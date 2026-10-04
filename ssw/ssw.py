@@ -325,7 +325,58 @@ class InternalMissionTab(ttk.Frame):
             variable=self.sbm_var,
             command=self.sbm_changed,
         ).pack(side="left")
+        ttk.Button(
+            self, text="Restore METAL GEAR ZEKE - Crossbattle",
+            command=self.restore_crossbattle,
+        ).grid(row=3, column=0, columnspan=3, sticky="ew", pady=(16, 0), ipady=12)
         self.session.subscribe(self.refresh)
+
+    def restore_crossbattle(self) -> None:
+        if self.session.data is None:
+            messagebox.showinfo("No save open", "Open a save first.")
+            return
+        plugin_root = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else ROOT
+        plugin = plugin_root / "asi" / "PeaceWalkerCrossBattleInputTest_v1.asi"
+        if not plugin.is_file():
+            messagebox.showerror("Cross Battle", "The Cross Battle ASI is missing from the asi folder.")
+            return
+        if not self.unlocked:
+            if not messagebox.askyesno("Experimental debug features", WARNING, icon="warning"):
+                return
+        chosen = filedialog.askopenfilename(
+            title="Select METAL GEAR SOLID PEACE WALKER.exe",
+            filetypes=(("Peace Walker", "METAL GEAR SOLID PEACE WALKER.exe"), ("Applications", "*.exe")),
+        )
+        if not chosen:
+            return
+        game = Path(chosen)
+        if game.name.lower() != "metal gear solid peace walker.exe" or not game.is_file():
+            messagebox.showerror("Cross Battle", "Select the real Peace Walker game executable.")
+            return
+        try:
+            scripts = game.parent / "scripts"
+            scripts.mkdir(exist_ok=True)
+            target = scripts / plugin.name
+            if target.exists() and target.resolve() != plugin.resolve():
+                backup = target.with_name(target.name + ".backup")
+                counter = 1
+                while backup.exists():
+                    backup = target.with_name(target.name + f".backup.{counter}")
+                    counter += 1
+                shutil.copy2(target, backup)
+            if target.resolve() != plugin.resolve():
+                shutil.copy2(plugin, target)
+        except OSError as exc:
+            messagebox.showerror("Cross Battle", f"Could not install the ASI. The save was not changed.\n\n{exc}")
+            return
+        self.unlocked = True
+        self.session.data[0x1C483] |= 0x80
+        self.session.notify()
+        messagebox.showinfo(
+            "Cross Battle restored",
+            "Cross Battle is enabled in the open save and its ASI is installed.\n\n"
+            "Use File > Save As to write the save, then restart the game. A compatible ASI loader is required.",
+        )
 
     def flag_value(self, mission: MissionFlag) -> bool:
         assert self.session.data is not None
