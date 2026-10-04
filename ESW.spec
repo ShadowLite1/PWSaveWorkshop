@@ -11,6 +11,7 @@ if plugin.exists():
     datas.append((str(plugin), 'quote_plugin'))
 a = Analysis([str(root / 'ssw' / 'ssw.py')], pathex=[str(root)], binaries=[], datas=datas, hiddenimports=['PIL._tkinter_finder'])
 pyz = PYZ(a.pure)
-exe = EXE(pyz, a.scripts, a.binaries, a.datas, [], name='EspiritSaveWorkshop', debug=False,
+exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='EspiritSaveWorkshop', debug=False,
           bootloader_ignore_signals=False, strip=False, upx=False, console=False,
-          icon=str(root / 'ssw' / 'assets' / 'app_icon.ico'))
+          contents_directory='_internal', icon=str(root / 'ssw' / 'assets' / 'app_icon.ico'))
+coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name='EspiritSaveWorkshop')

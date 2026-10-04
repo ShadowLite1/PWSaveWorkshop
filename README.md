@@ -19,7 +19,7 @@ python ssw/ssw.py
 powershell -ExecutionPolicy Bypass -File ./build.ps1
 ```
 
-The build creates `dist/EspiritSaveWorkshop.exe`. Build outputs and personal saves are excluded from Git.
+The build creates `dist/EspiritSaveWorkshop/EspiritSaveWorkshop.exe` alongside an `_internal` folder containing dependencies and resources. Distribute the entire `EspiritSaveWorkshop` folder; the executable requires `_internal` to remain beside it. This is a folder-based build, not an all-in-one executable. Build outputs and personal saves are excluded from Git.
 
 Keep an untouched backup of your save. Experimental IDs and mission switches are not guaranteed playable. This editor does not install the seven-slot runtime patch automatically.
 
