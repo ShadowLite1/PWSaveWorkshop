@@ -335,6 +335,7 @@ class InternalMissionTab(ttk.Frame):
         if self.session.data is None:
             messagebox.showinfo("No save open", "Open a save first.")
             return
+        self.crossbattle_plugin_notice()
         plugin_root = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else ROOT
         plugin = plugin_root / "asi" / "PeaceWalkerCrossBattleInputTest_v1.asi"
         if not plugin.is_file():
@@ -378,6 +379,13 @@ class InternalMissionTab(ttk.Frame):
             "Use File > Save As to write the save, then restart the game. A compatible ASI loader is required.",
         )
 
+    @staticmethod
+    def crossbattle_plugin_notice() -> None:
+        messagebox.showinfo(
+            "Required plugin",
+            "In Order to restore this mission, you must install PeaceWalkerCrossBattleInputTest_v1.asi plugin.",
+        )
+
     def flag_value(self, mission: MissionFlag) -> bool:
         assert self.session.data is not None
         return all(self.session.data[offset] & mission.mask for offset in mission.offsets)
@@ -410,6 +418,8 @@ class InternalMissionTab(ttk.Frame):
                 self.session.data[offset] |= mission.mask
             else:
                 self.session.data[offset] &= (~mission.mask) & 0xFF
+        if enabled and mission.offsets == (0x1C483,) and mission.mask == 0x80:
+            self.crossbattle_plugin_notice()
 
     def sbm_changed(self) -> None:
         if self.session.data is None:
