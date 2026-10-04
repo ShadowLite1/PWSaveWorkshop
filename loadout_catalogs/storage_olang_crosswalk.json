@@ -1,0 +1,914 @@
+{
+  "format_version": 1,
+  "purpose": "Translation candidates from decrypted STW loadout storage IDs to OLANG names/entries.",
+  "warning": "Candidate OLANG IDs are name matches, not confirmed save values. Confirm the exact ranked entry with controlled saves.",
+  "items": {
+    "0000": {
+      "name": "Empty",
+      "confidence": "confirmed",
+      "evidence": [
+        "multiple Mission Prep captures"
+      ],
+      "olang_candidates": []
+    },
+    "003F": {
+      "name": "Ration",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake and Gecko Mission Prep captures"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 187,
+          "olang_key_hash": "000027",
+          "name": "RATION"
+        },
+        {
+          "quote_id": 198,
+          "olang_key_hash": "000026",
+          "name": "RATION"
+        },
+        {
+          "quote_id": 209,
+          "olang_key_hash": "000025",
+          "name": "RATION"
+        },
+        {
+          "quote_id": 220,
+          "olang_key_hash": "000024",
+          "name": "RATION"
+        },
+        {
+          "quote_id": 231,
+          "olang_key_hash": "000023",
+          "name": "RATION"
+        }
+      ]
+    },
+    "0060": {
+      "name": "Love Box",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 56,
+          "olang_key_hash": "0001FB",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 57,
+          "olang_key_hash": "0001FA",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 58,
+          "olang_key_hash": "0001F9",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 59,
+          "olang_key_hash": "0001F8",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 60,
+          "olang_key_hash": "0001F7",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 61,
+          "olang_key_hash": "0001F6",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 287,
+          "olang_key_hash": "000003",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 398,
+          "olang_key_hash": "000002",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 509,
+          "olang_key_hash": "000001",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 510,
+          "olang_key_hash": "000000",
+          "name": "LOVE BOX"
+        }
+      ]
+    },
+    "0061": {
+      "name": "Fulton System",
+      "confidence": "confirmed",
+      "evidence": [
+        "Gecko slot 160 capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 85,
+          "olang_key_hash": "0001E1",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 86,
+          "olang_key_hash": "0001E0",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 88,
+          "olang_key_hash": "0001DF",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 89,
+          "olang_key_hash": "0001DE",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 90,
+          "olang_key_hash": "0001DD",
+          "name": "FULTON SYS"
+        }
+      ]
+    },
+    "0062": {
+      "name": "Binos",
+      "confidence": "confirmed",
+      "evidence": [
+        "Gecko slot 160 capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 103,
+          "olang_key_hash": "0001D1",
+          "name": "BINOS"
+        }
+      ]
+    },
+    "0063": {
+      "name": "Love Box",
+      "confidence": "confirmed",
+      "evidence": [
+        "Gecko slot 160 capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 56,
+          "olang_key_hash": "0001FB",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 57,
+          "olang_key_hash": "0001FA",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 58,
+          "olang_key_hash": "0001F9",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 59,
+          "olang_key_hash": "0001F8",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 60,
+          "olang_key_hash": "0001F7",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 61,
+          "olang_key_hash": "0001F6",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 287,
+          "olang_key_hash": "000003",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 398,
+          "olang_key_hash": "000002",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 509,
+          "olang_key_hash": "000001",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 510,
+          "olang_key_hash": "000000",
+          "name": "LOVE BOX"
+        }
+      ]
+    },
+    "0064": {
+      "name": "Love Box",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture; rank 5 visible"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 56,
+          "olang_key_hash": "0001FB",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 57,
+          "olang_key_hash": "0001FA",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 58,
+          "olang_key_hash": "0001F9",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 59,
+          "olang_key_hash": "0001F8",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 60,
+          "olang_key_hash": "0001F7",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 61,
+          "olang_key_hash": "0001F6",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 287,
+          "olang_key_hash": "000003",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 398,
+          "olang_key_hash": "000002",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 509,
+          "olang_key_hash": "000001",
+          "name": "LOVE BOX"
+        },
+        {
+          "quote_id": 510,
+          "olang_key_hash": "000000",
+          "name": "LOVE BOX"
+        }
+      ]
+    },
+    "0078": {
+      "name": "CONFLICT: NVG / Surround Indicator",
+      "confidence": "conflict",
+      "evidence": [
+        "Snake CT Gun capture displayed NVG",
+        "Gecko slot 160 capture displayed Surround Indicator"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 79,
+          "olang_key_hash": "0001E7",
+          "name": "NVG"
+        },
+        {
+          "quote_id": 81,
+          "olang_key_hash": "0001E5",
+          "name": "NVG"
+        },
+        {
+          "quote_id": 82,
+          "olang_key_hash": "0001E4",
+          "name": "NVG"
+        },
+        {
+          "quote_id": 83,
+          "olang_key_hash": "0001E3",
+          "name": "NVG"
+        },
+        {
+          "quote_id": 84,
+          "olang_key_hash": "0001E2",
+          "name": "NVG"
+        },
+        {
+          "quote_id": 130,
+          "olang_key_hash": "0001B8",
+          "name": "SRND. IND."
+        },
+        {
+          "quote_id": 132,
+          "olang_key_hash": "0001B7",
+          "name": "SRND. IND."
+        }
+      ]
+    },
+    "007C": {
+      "name": "Fulton System",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 85,
+          "olang_key_hash": "0001E1",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 86,
+          "olang_key_hash": "0001E0",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 88,
+          "olang_key_hash": "0001DF",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 89,
+          "olang_key_hash": "0001DE",
+          "name": "FULTON SYS"
+        },
+        {
+          "quote_id": 90,
+          "olang_key_hash": "0001DD",
+          "name": "FULTON SYS"
+        }
+      ]
+    },
+    "008B": {
+      "name": "Binos",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 103,
+          "olang_key_hash": "0001D1",
+          "name": "BINOS"
+        }
+      ]
+    },
+    "00A1": {
+      "name": "Surround Indicator",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "quote_id": 130,
+          "olang_key_hash": "0001B8",
+          "name": "SRND. IND."
+        },
+        {
+          "quote_id": 132,
+          "olang_key_hash": "0001B7",
+          "name": "SRND. IND."
+        }
+      ]
+    }
+  },
+  "weapons": {
+    "0000": {
+      "name": "Empty",
+      "confidence": "confirmed",
+      "evidence": [
+        "multiple Mission Prep captures"
+      ],
+      "olang_candidates": []
+    },
+    "0002": {
+      "name": "MK.22",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 44,
+          "olang_key_hash": "00002C",
+          "name": "MK.22",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 106,
+          "olang_key_hash": "00006A",
+          "name": "MK.22",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 139,
+          "olang_key_hash": "00008B",
+          "name": "MK.22",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 186,
+          "olang_key_hash": "0000BA",
+          "name": "MK.22",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 307,
+          "olang_key_hash": "000133",
+          "name": "MK.22",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "000E": {
+      "name": "EZ GUN (PR)",
+      "confidence": "confirmed",
+      "evidence": [
+        "controlled Weapon Slot 1 change"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 557,
+          "olang_key_hash": "00022D",
+          "name": "EZ GUN(PR)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 568,
+          "olang_key_hash": "000238",
+          "name": "EZ GUN(PR)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 570,
+          "olang_key_hash": "00023A",
+          "name": "EZ GUN(PR)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 577,
+          "olang_key_hash": "000241",
+          "name": "EZ GUN(PR)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "0034": {
+      "name": "M16A1",
+      "confidence": "confirmed",
+      "evidence": [
+        "Gecko slot 160 capture"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 24,
+          "olang_key_hash": "000018",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 25,
+          "olang_key_hash": "000019",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 26,
+          "olang_key_hash": "00001A",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 567,
+          "olang_key_hash": "000237",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 569,
+          "olang_key_hash": "000239",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "004C": {
+      "name": "M16A1",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake initial controlled capture"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 24,
+          "olang_key_hash": "000018",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 25,
+          "olang_key_hash": "000019",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 26,
+          "olang_key_hash": "00001A",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 567,
+          "olang_key_hash": "000237",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 569,
+          "olang_key_hash": "000239",
+          "name": "M16A1",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "009B": {
+      "name": "M10 (SP)",
+      "confidence": "confirmed",
+      "evidence": [
+        "Gecko slot 160 controlled capture; rank 2 visible"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 38,
+          "olang_key_hash": "000026",
+          "name": "M10(SP)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "00F8": {
+      "name": "Grenade",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake and Gecko captures"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 259,
+          "olang_key_hash": "000103",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 260,
+          "olang_key_hash": "000104",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 261,
+          "olang_key_hash": "000105",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 263,
+          "olang_key_hash": "000107",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 264,
+          "olang_key_hash": "000108",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "00FC": {
+      "name": "Grenade",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture; rank 5 visible"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 259,
+          "olang_key_hash": "000103",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 260,
+          "olang_key_hash": "000104",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 261,
+          "olang_key_hash": "000105",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 263,
+          "olang_key_hash": "000107",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 264,
+          "olang_key_hash": "000108",
+          "name": "GRENADE",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "0101": {
+      "name": "Stun Grenade",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture; rank 5 visible"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 254,
+          "olang_key_hash": "0000FE",
+          "name": "STUN G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 255,
+          "olang_key_hash": "0000FF",
+          "name": "STUN G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 256,
+          "olang_key_hash": "000100",
+          "name": "STUN G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 257,
+          "olang_key_hash": "000101",
+          "name": "STUN G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 258,
+          "olang_key_hash": "000102",
+          "name": "STUN G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "010B": {
+      "name": "Smoke Grenade",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture; rank 5 visible"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 234,
+          "olang_key_hash": "0000EA",
+          "name": "SMOKE G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 235,
+          "olang_key_hash": "0000EB",
+          "name": "SMOKE G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 245,
+          "olang_key_hash": "0000F5",
+          "name": "SMOKE G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 246,
+          "olang_key_hash": "0000F6",
+          "name": "SMOKE G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 247,
+          "olang_key_hash": "0000F7",
+          "name": "SMOKE G.",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "0132": {
+      "name": "Cookbook",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture; rank 5 visible"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 178,
+          "olang_key_hash": "0000B2",
+          "name": "COOKBOOK",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 179,
+          "olang_key_hash": "0000B3",
+          "name": "COOKBOOK",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 180,
+          "olang_key_hash": "0000B4",
+          "name": "COOKBOOK",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 181,
+          "olang_key_hash": "0000B5",
+          "name": "COOKBOOK",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        },
+        {
+          "weapon_id": 182,
+          "olang_key_hash": "0000B6",
+          "name": "COOKBOOK",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "024C": {
+      "name": "CT GUN (SM)",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 47,
+          "olang_key_hash": "00002F",
+          "name": "CT GUN(SM)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "024D": {
+      "name": "CT GUN (ST)",
+      "confidence": "confirmed",
+      "evidence": [
+        "Snake CT Gun capture"
+      ],
+      "olang_candidates": [
+        {
+          "weapon_id": 46,
+          "olang_key_hash": "00002E",
+          "name": "CT GUN(ST)",
+          "rank": null,
+          "rank_status": "requires development-table confirmation"
+        }
+      ]
+    },
+    "03F3": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F4": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F5": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F6": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F7": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F8": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03F9": {
+      "name": "Nonfunctional weapon value",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "In-game Mission Prep test; no function"
+      ],
+      "olang_candidates": []
+    },
+    "03FE": {
+      "name": "Invalid / garbled weapon text",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "Snake Mission Prep capture; weapon slot 2 displayed garbled text"
+      ],
+      "olang_candidates": []
+    },
+    "03FF": {
+      "name": "Invalid / garbled weapon text",
+      "confidence": "confirmed",
+      "selectable": false,
+      "evidence": [
+        "Snake Mission Prep capture; weapon slot 1 displayed garbled text"
+      ],
+      "olang_candidates": []
+    }
+  }
+}
