@@ -222,7 +222,6 @@ LOADOUT_MODES = {
     "Versus Ops — original preset": (3,),
     "Versus Ops — MSF soldier": (4,),
     "Mission Prep record 2 — experimental": (1,),
-    "Mission Prep record 3 — experimental": (2,),
 }
 
 
@@ -577,13 +576,9 @@ class LoadoutTab(ttk.Frame):
         for number, label in enumerate(LOADOUT_MODES):
             ttk.Radiobutton(modes, text=label, value=label, variable=self.mode, command=self.refresh).grid(row=number // 3, column=number % 3, sticky="w", padx=(0, 12), pady=2)
         soldier_line = ttk.Frame(self)
-        soldier_line.pack(fill="x", pady=(8, 0))
-        ttk.Label(soldier_line, text="Combat Unit soldier").pack(side="left")
         self.soldier_box = ttk.Combobox(
             soldier_line, textvariable=self.soldier_choice, state="readonly", width=44
         )
-        self.soldier_box.pack(side="left", padx=10)
-        self.soldier_box.bind("<<ComboboxSelected>>", self.soldier_changed)
         self.active_character_status = tk.StringVar(value="Active saved character: unknown")
         ttk.Label(self, textvariable=self.active_character_status).pack(anchor="w", pady=(8, 0))
         grid = ttk.LabelFrame(self, text="Preset", padding=12)
@@ -725,14 +720,7 @@ class LoadoutTab(ttk.Frame):
                 f"Saved active character: {self.active_character()} — editing the selected Versus preset"
             )
             return
-        selected = self.soldier_choice.get()
-        index = self.soldier_choice_slots.get(selected)
-        if index is None:
-            self.active_character_status.set(f"Active saved character: {self.active_character()}")
-        else:
-            self.active_character_status.set(
-                f"Selected for Campaign / Co-op: {selected} (applied when APPLY PRESET is pressed)"
-            )
+        self.active_character_status.set(f"Active saved character: {self.active_character()}")
 
     def soldier_changed(self, _event=None) -> None:
         self.update_selected_soldier_status()
@@ -844,14 +832,6 @@ class LoadoutTab(ttk.Frame):
                 + "\n\nKeep these exact raw IDs and continue?",
             ):
                 return
-            if self.mode.get().startswith("Active selected character"):
-                selected = self.soldier_choice.get()
-                roster_index = self.soldier_choice_slots.get(selected)
-                if roster_index is not None:
-                    source = ROSTER_BASE + roster_index * ROSTER_RECORD_SIZE
-                    self.session.data[
-                        ACTIVE_SOLDIER_RECORD_OFFSET:ACTIVE_SOLDIER_RECORD_OFFSET + ROSTER_RECORD_SIZE
-                    ] = self.session.data[source:source + ROSTER_RECORD_SIZE]
             for index in self.record_indexes():
                 base = self.base(index)
                 for slot in range(ITEM_SLOT_COUNT):
