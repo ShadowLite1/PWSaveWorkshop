@@ -21,6 +21,10 @@ cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerEightSkill
 if errorlevel 1 goto failed
 cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerCrossBattleInputTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerCrossBattleInputTest_v1.asi" /DLL
 if errorlevel 1 goto failed
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD /I"%TASKMH%\include" "%TASKROOT%plugins\PeaceWalkerStrikeTableTest.cpp" buffer.obj hook.obj trampoline.obj hde64.obj /link /OUT:"%TASKROOT%asi\PeaceWalkerStrikeTableTest_v1.asi" /DLL
+if errorlevel 1 goto failed
+cl /nologo /std:c++20 /O2 /MT /EHsc /LD "%TASKROOT%plugins\PeaceWalkerVersusEquipment.cpp" /link /OUT:"%TASKROOT%asi\PeaceWalkerVersusEquipment_v4.asi" /DLL
+if errorlevel 1 goto failed
 popd
 exit /b 0
 :failed

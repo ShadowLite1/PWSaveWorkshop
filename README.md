@@ -29,4 +29,6 @@ The `asi` folder contains complete plugin files: Custom Quotes (user-confirmed w
 
 The build copies `asi` beside the executable, separately from `_internal`. To install a plugin, copy the desired ASI into the game's `mgspw/scripts` folder with a compatible ASI loader. Restart the game after changing plugins. ESW's quote installation button reads its plugin from `asi`.
 
-To rebuild the native plugins, install Visual Studio C++ Build Tools and run `build_plugins.bat`. This replaces the four files in `asi` with newly compiled versions. The checked-in ASIs are the existing working builds.
+The package also includes `PeaceWalkerStrikeTableTest_v1.asi` (strike arrival confirmed in testing) and `PeaceWalkerVersusEquipment_v4.asi` (Versus equipment access). Equipment access does not restore every Co-op effect; ASSN/Rescue Box behavior remains unfinished.
+
+To rebuild the native plugins, install Visual Studio C++ Build Tools and run `build_plugins.bat`. This replaces the six files in `asi` with newly compiled versions. The checked-in ASIs are the existing working builds.
