@@ -1043,6 +1043,9 @@ class SoldierEditor(ttk.Frame):
         raw = ttk.Frame(right)
         self.raw_text = tk.Text(raw, height=5, wrap="none", font=("Consolas", 9), bg="#20221f", fg="#eeeeea", insertbackground="white")
 
+        if self.embedded:
+            return
+
         bottom = ttk.Frame(right)
         bottom.pack(fill="x", pady=(4, 0))
         ttk.Button(bottom, text="OPEN SAVE", style="PW.TButton", command=self.open_save).pack(side="left")
