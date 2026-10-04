@@ -219,8 +219,8 @@ def load_equipment_catalogs() -> tuple[
 ITEMS, WEAPONS, ITEM_INFO, WEAPON_INFO = load_equipment_catalogs()
 LOADOUT_MODES = {
     "Snake - Coop": (0,),
-    "Versus Ops — original preset": (3,),
-    "Versus Ops — MSF soldier": (4,),
+    "Snake - Versus Ops": (3,),
+    "MSF Soldier - Versus Ops": (4,),
     "MSF Soldier - Coop": (1,),
 }
 
@@ -551,7 +551,7 @@ class LoadoutTab(ttk.Frame):
     def __init__(self, master, session: SaveSession, group="Coop") -> None:
         super().__init__(master, padding=8)
         self.session = session
-        self.mode = tk.StringVar(value="Snake - Coop" if group == "Coop" else "Versus Ops — original preset")
+        self.mode = tk.StringVar(value="Snake - Coop" if group == "Coop" else "Snake - Versus Ops")
         self.soldier_choice = tk.StringVar()
         self.soldier_choice_slots: dict[str, int | None] = {}
         self.items = [tk.StringVar() for _ in range(ITEM_SLOT_COUNT)]
@@ -712,7 +712,7 @@ class LoadoutTab(ttk.Frame):
             self.soldier_choice.set("No Combat Unit soldiers found")
 
     def update_selected_soldier_status(self) -> None:
-        if self.mode.get().startswith("Versus Ops"):
+        if self.mode.get().endswith("Versus Ops"):
             self.active_character_status.set(
                 f"Saved active character: {self.active_character()} — editing the selected Versus preset"
             )
@@ -780,14 +780,14 @@ class LoadoutTab(ttk.Frame):
             self.weapons[slot].set(f"{weapon_value:04X} — {WEAPONS.get(weapon_value, 'Unmapped storage ID')}")
         uniform_value = self.session.data[UNIFORM_OFFSETS[0]]
         self.uniform.set(f"{uniform_value:02X} — {UNIFORMS.get(uniform_value, 'Unmapped')}")
-        if self.mode.get().startswith("Versus Ops"):
+        if self.mode.get().endswith("Versus Ops"):
             self.soldier_box.configure(state="disabled")
-            self.uniform_box.configure(state="disabled" if self.mode.get().endswith("MSF soldier") else "readonly")
+            self.uniform_box.configure(state="disabled" if self.mode.get() == "MSF Soldier - Versus Ops" else "readonly")
             self.versus_role_box.configure(state="readonly")
             self.mapping_status.set(
                 "MSF Versus preset at 0xB8A2: confirmed against RAVEN's saved M16A1(STG), C4 and Claymore loadout. "
                 "This is a preset record, not a verified per-soldier table. The roster selector does not change it."
-                if self.mode.get().endswith("MSF soldier") else
+                if self.mode.get() == "MSF Soldier - Versus Ops" else
                 "Earlier verified Versus Ops record at 0xB800. Snake uniform and "
                 "recruited-soldier role are separate fields. The full item list is available for experimental cross-mode use."
             )
@@ -835,7 +835,7 @@ class LoadoutTab(ttk.Frame):
                     struct.pack_into("<H", self.session.data, base + ITEM_OFFSET + slot * 2, item_values[slot])
                 for slot in range(WEAPON_SLOT_COUNT):
                     struct.pack_into("<H", self.session.data, base + WEAPON_OFFSET + slot * 2, weapon_values[slot])
-            if self.mode.get().startswith("Versus Ops") or self.mode.get() == "Snake - Coop":
+            if self.mode.get().endswith("Versus Ops") or self.mode.get() == "Snake - Coop":
                 uniform_value = int(self.uniform.get().split("—", 1)[0].strip(), 16)
                 if uniform_value not in UNIFORMS:
                     raise ValueError(f"Unknown Versus uniform ID {uniform_value:02X}")
@@ -845,10 +845,10 @@ class LoadoutTab(ttk.Frame):
                 # into all three can crash when Mission Prep is unloaded.
                 uniform_offset = (
                     UNIFORM_OFFSETS[2]
-                    if self.mode.get().startswith("Versus Ops")
+                    if self.mode.get().endswith("Versus Ops")
                     else UNIFORM_OFFSETS[0]
                 )
-                if not self.mode.get().endswith("MSF soldier"):
+                if self.mode.get() != "MSF Soldier - Versus Ops":
                     self.session.data[uniform_offset] = uniform_value
                 role_text = self.versus_role_uniform.get()
                 if role_text != LEAVE_ROLE_UNCHANGED:
