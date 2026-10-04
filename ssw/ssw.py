@@ -293,22 +293,23 @@ class InternalMissionTab(ttk.Frame):
         for widget in title_widgets:
             widget.pack_forget()
         for row, widget in enumerate(title_widgets):
-            widget.grid(row=row, column=0, columnspan=3, sticky="w", pady=(0, 12))
+            widget.grid(row=row, column=0, sticky="w", pady=(0, 12))
         left = ttk.Frame(self)
-        left.grid(row=2, column=0, sticky="nsew", padx=(0, 12))
-        tk.Frame(self, bg="#111111", width=3).grid(row=2, column=1, sticky="ns")
-        right = ttk.Frame(self, padding=(16, 0))
-        right.grid(row=2, column=2, sticky="nsew")
+        left.grid(row=2, column=0, sticky="new", padx=(0, 6))
+        tk.Frame(self, bg="#111111", width=3).grid(row=0, column=1, rowspan=3, sticky="ns")
+        right = ttk.Frame(self)
+        right.grid(row=2, column=2, sticky="new", padx=(6, 0))
         panels = []
         scroll_handlers = []
         for pane in (left, right):
-            ttk.Label(pane, text="INTERNAL MISSIONS", style="Heading.TLabel").pack(anchor="w", pady=(0, 8))
-            canvas = tk.Canvas(pane, highlightthickness=0, bg="#d6d5bd")
-            scrollbar = ttk.Scrollbar(pane, orient="vertical", command=canvas.yview)
+            group = ttk.LabelFrame(pane, text="Internal Missions", padding=8)
+            group.pack(fill="x", anchor="n")
+            canvas = tk.Canvas(group, height=200, highlightthickness=0, bg="#d6d5bd")
+            scrollbar = ttk.Scrollbar(group, orient="vertical", command=canvas.yview)
             scrollbar.pack(side="right", fill="y")
             canvas.pack(fill="both", expand=True)
             canvas.configure(yscrollcommand=scrollbar.set)
-            panel = ttk.Frame(canvas, padding=8)
+            panel = ttk.Frame(canvas, padding=4)
             window = canvas.create_window((0, 0), window=panel, anchor="nw")
             panel.bind("<Configure>", lambda _e, c=canvas: c.configure(scrollregion=c.bbox("all")))
             canvas.bind("<Configure>", lambda e, c=canvas, w=window: c.itemconfigure(w, width=e.width))
