@@ -218,10 +218,10 @@ def load_equipment_catalogs() -> tuple[
 
 ITEMS, WEAPONS, ITEM_INFO, WEAPON_INFO = load_equipment_catalogs()
 LOADOUT_MODES = {
-    "Active selected character — Campaign / Co-op": (0,),
+    "Snake - Coop": (0,),
     "Versus Ops — original preset": (3,),
     "Versus Ops — MSF soldier": (4,),
-    "Mission Prep record 2 — experimental": (1,),
+    "MSF Soldier - Coop": (1,),
 }
 
 
@@ -329,8 +329,8 @@ class SaveSession:
 
 
 class InternalMissionTab(ttk.Frame):
-    def __init__(self, master, session: SaveSession) -> None:
-        super().__init__(master, padding=16)
+    def __init__(self, master, session: SaveSession, group="Coop") -> None:
+        super().__init__(master, padding=8)
         self.session = session
         self.vars = [tk.BooleanVar() for _ in MISSION_FLAGS]
         self.sbm_var = tk.BooleanVar()
@@ -551,7 +551,7 @@ class LoadoutTab(ttk.Frame):
     def __init__(self, master, session: SaveSession) -> None:
         super().__init__(master, padding=16)
         self.session = session
-        self.mode = tk.StringVar(value="Active selected character — Campaign / Co-op")
+        self.mode = tk.StringVar(value="Snake - Coop" if group == "Coop" else "Versus Ops — original preset")
         self.soldier_choice = tk.StringVar()
         self.soldier_choice_slots: dict[str, int | None] = {}
         self.items = [tk.StringVar() for _ in range(ITEM_SLOT_COUNT)]
@@ -561,7 +561,7 @@ class LoadoutTab(ttk.Frame):
         self.id_detail = tk.StringVar(
             value="Select an item or weapon to see how strongly its storage ID is verified."
         )
-        ttk.Label(self, text="LOADOUT EDITOR", style="Heading.TLabel").pack(anchor="w")
+        ttk.Label(self, text=group.upper(), style="Heading.TLabel").pack(anchor="w")
         ttk.Label(
             self,
             text=(
@@ -570,19 +570,20 @@ class LoadoutTab(ttk.Frame):
                 "Cross-mode equipment is experimental: ESW will store it, but the game may still enforce a runtime mode filter."
             ),
             wraplength=950,
-        ).pack(anchor="w", pady=(0, 12))
+        )
         modes = ttk.Frame(self)
         modes.pack(fill="x")
-        for number, label in enumerate(LOADOUT_MODES):
+        labels = [label for label in LOADOUT_MODES if label.endswith("Coop") == (group == "Coop")]
+        for number, label in enumerate(labels):
             ttk.Radiobutton(modes, text=label, value=label, variable=self.mode, command=self.refresh).grid(row=number // 3, column=number % 3, sticky="w", padx=(0, 12), pady=2)
         soldier_line = ttk.Frame(self)
         self.soldier_box = ttk.Combobox(
             soldier_line, textvariable=self.soldier_choice, state="readonly", width=44
         )
         self.active_character_status = tk.StringVar(value="Active saved character: unknown")
-        ttk.Label(self, textvariable=self.active_character_status).pack(anchor="w", pady=(8, 0))
+        # The save's active character remains unchanged by loadout edits.
         grid = ttk.LabelFrame(self, text="Preset", padding=12)
-        grid.pack(fill="x", pady=12)
+        grid.pack(fill="x", pady=4)
         ttk.Label(grid, text="Items").grid(row=0, column=0, sticky="w")
         ttk.Label(grid, text="Weapons").grid(row=0, column=1, sticky="w")
         self.item_boxes = []
@@ -590,12 +591,12 @@ class LoadoutTab(ttk.Frame):
         for slot in range(max(ITEM_SLOT_COUNT, WEAPON_SLOT_COUNT)):
             if slot < ITEM_SLOT_COUNT:
                 item = ttk.Combobox(grid, textvariable=self.items[slot], width=38)
-                item.grid(row=slot + 1, column=0, padx=(0, 12), pady=5, sticky="ew")
+                item.grid(row=slot + 1, column=0, padx=(0, 12), pady=1, sticky="ew")
                 item.bind("<<ComboboxSelected>>", self.equipment_selected)
                 self.item_boxes.append(item)
             if slot < WEAPON_SLOT_COUNT:
                 weapon = ttk.Combobox(grid, textvariable=self.weapons[slot], width=38)
-                weapon.grid(row=slot + 1, column=1, pady=5, sticky="ew")
+                weapon.grid(row=slot + 1, column=1, pady=1, sticky="ew")
                 weapon.bind("<<ComboboxSelected>>", self.equipment_selected)
                 self.weapon_boxes.append(weapon)
         grid.columnconfigure((0, 1), weight=1)
@@ -794,7 +795,7 @@ class LoadoutTab(ttk.Frame):
                 "Earlier verified Versus Ops record at 0xB800. Snake uniform and "
                 "recruited-soldier role are separate fields. The full item list is available for experimental cross-mode use."
             )
-        elif self.mode.get().startswith("Active selected character"):
+        elif self.mode.get() == "Snake - Coop":
             self.soldier_box.configure(state="readonly")
             self.uniform_box.configure(state="readonly")
             self.versus_role_box.configure(state="readonly")
@@ -838,7 +839,7 @@ class LoadoutTab(ttk.Frame):
                     struct.pack_into("<H", self.session.data, base + ITEM_OFFSET + slot * 2, item_values[slot])
                 for slot in range(WEAPON_SLOT_COUNT):
                     struct.pack_into("<H", self.session.data, base + WEAPON_OFFSET + slot * 2, weapon_values[slot])
-            if self.mode.get().startswith(("Versus Ops", "Active selected character")):
+            if self.mode.get().startswith("Versus Ops") or self.mode.get() == "Snake - Coop":
                 uniform_value = int(self.uniform.get().split("—", 1)[0].strip(), 16)
                 if uniform_value not in UNIFORMS:
                     raise ValueError(f"Unknown Versus uniform ID {uniform_value:02X}")
@@ -1055,7 +1056,12 @@ class ESW(tk.Tk):
         self.soldier_editor = SoldierEditor(tabs, embedded=True, open_callback=self.open_save)
         tabs.add(self.soldier_editor, text="Soldier Editor")
         tabs.add(InternalMissionTab(tabs, self.session), text="Flag Editor")
-        self.loadout_tab = LoadoutTab(tabs, self.session)
+        self.loadout_tab = ttk.Frame(tabs)
+        self.coop_loadout = LoadoutTab(self.loadout_tab, self.session, "Coop")
+        self.coop_loadout.pack(fill="x")
+        ttk.Separator(self.loadout_tab, orient="horizontal").pack(fill="x", padx=8, pady=6)
+        self.versus_loadout = LoadoutTab(self.loadout_tab, self.session, "Versus Ops")
+        self.versus_loadout.pack(fill="x")
         tabs.add(self.loadout_tab, text="Loadout Editor")
         tabs.add(ASIInstallerTab(tabs), text="ASI Installer")
         ttk.Label(self, textvariable=self.status, anchor="w", padding=6).pack(fill="x")
