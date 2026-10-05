@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from edit_save import update_internal_checks
-from save_cipher import derive_state, filename_checksum, transform
+from save_cipher import derive_state, filename_checksum, save_filename, transform
 from soldier_editor import SoldierEditor
 
 SAVE_SIZE = 0x4F950
@@ -321,7 +321,9 @@ class SaveSession:
         output = bytearray(self.data)
         update_internal_checks(output)
         transform(output, self.header_index)
-        expected = f"STW000000{filename_checksum(output):04x}01"
+        expected = save_filename(output, self.data)
+        if path.parent.name.casefold() == "ww" and path.name != expected:
+            raise ValueError(f"This save must be named {expected} to match its checksum and slot.")
         if self.source and path.resolve() == self.source.resolve():
             shutil.copy2(self.source, self.source.with_name(self.source.name + ".backup"))
         path.write_bytes(output)

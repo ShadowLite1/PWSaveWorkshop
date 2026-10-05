@@ -17,7 +17,7 @@ except ImportError:  # pragma: no cover - the editor is distributed for Windows
     winsound = None
 
 from edit_save import update_internal_checks
-from save_cipher import derive_state, filename_checksum, transform
+from save_cipher import derive_state, filename_checksum, save_filename, transform
 
 
 PROLOGUE_REGULAR = "Prologue Atlas"
@@ -2547,8 +2547,7 @@ class SoldierEditor(ttk.Frame):
                 candidate[ROSTER_COUNT_OFFSET : ROSTER_COUNT_OFFSET + 4] = required_count.to_bytes(4, "little")
         update_internal_checks(candidate)
         transform(candidate, self.header_index)
-        checksum = filename_checksum(candidate)
-        suggested = f"STW000000{checksum:04x}01"
+        suggested = save_filename(candidate, self.data)
         path_text = filedialog.asksaveasfilename(
             title="Save edited Peace Walker file",
             initialdir=str(self.source_path.parent),
@@ -2558,6 +2557,9 @@ class SoldierEditor(ttk.Frame):
         if not path_text:
             return
         output = Path(path_text)
+        if output.parent.name.casefold() == "ww" and output.name != suggested:
+            messagebox.showerror("Invalid save filename", f"This save must be named {suggested} to match its checksum and slot. Nothing was written.")
+            return
         source_resolved = self.source_path.resolve()
         output_resolved = output.resolve()
         if output.parent.name.casefold() == "ww":

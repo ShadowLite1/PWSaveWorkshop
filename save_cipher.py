@@ -24,6 +24,14 @@ def filename_checksum(data: bytes | bytearray) -> int:
     return checksum
 
 
+def save_filename(encrypted: bytes | bytearray, decoded: bytes | bytearray) -> str:
+    """Keep the internal save slot in the game's checksum-derived filename."""
+    slot = u32(decoded, 0x178)
+    if not 1 <= slot <= 99:
+        raise ValueError(f"Unsupported save slot {slot}; refusing to guess a filename.")
+    return f"STW000000{filename_checksum(encrypted):04x}{slot:02d}"
+
+
 def derive_state_at(data: bytes | bytearray, index: int) -> tuple[int, int, int, int, int]:
     return derive_state_at_header(data, 0, index)
 
